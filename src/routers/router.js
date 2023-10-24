@@ -6,7 +6,7 @@ import PodiumBiPortal from "@/views/PodiumBiPortal.vue";
 import WalmartRetailData from "@/views/WalmartRetailData.vue";
 
 const router = createRouter({
-    history: createWebHistory(),
+    history: createWebHistory(import.meta.env.BASE_URL),
     routes: [
         {
             path: '/',
@@ -32,7 +32,7 @@ const router = createRouter({
             path: '/walmartRetailData',
             name: 'walmartRetailData',
             component: WalmartRetailData
-        },
+        }
     ]
 })
 
