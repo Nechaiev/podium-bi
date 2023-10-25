@@ -1,5 +1,9 @@
 <template>
-  <component :is="data.teg" :target="target" v-bind="data.attrs" :class="classes">
+  <component
+    :is="data.tag"
+    :target="target"
+    v-bind="data.attrs"
+    :class="classes">
     <slot/>
   </component>
 </template>
@@ -24,14 +28,14 @@ const props = defineProps({
 const data = computed(() => {
   if (props.href) {
     return {
-      teg: 'a',
+      tag: 'a',
       attrs: {
         href: props.href
       }
     }
   }
   return {
-    teg: RouterLink,
+    tag: RouterLink,
     attrs: {
       to: props.to
     }
@@ -40,12 +44,8 @@ const data = computed(() => {
 
 const classes = computed(() => {
   return {
-    base: 'hover:text-teal-600',
-    secondary: '',
+    base: 'text-title_6 p-5 leading-none hover:text-primaryColor',
+    secondary: 'text-title_3 hover:text-green-500',
   }[props.color]
 })
 </script>
-
-<style scoped>
-
-</style>

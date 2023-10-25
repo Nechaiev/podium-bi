@@ -1,6 +1,13 @@
 <template>
-  PodiumBiPortal
-
+  <div>
+    PodiumBiPortal
+  </div>
+  <div>
+    PodiumBiPortal
+  </div>
+  <div>
+    PodiumBiPortal
+  </div>
 </template>
 
 <script setup>

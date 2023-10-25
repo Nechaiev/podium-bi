@@ -5,10 +5,5 @@
 </template>
 
 <script setup>
-
 import IconLogo from "@/components/UI/icons/Logo.vue";
 </script>
-
-<style scoped>
-
-</style>

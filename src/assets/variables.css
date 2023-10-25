@@ -1,6 +1,7 @@
 :root{
     --primaryColor:   #0CC6B3;
     --secondryColor:   #0f0;
+    --bg-body: #F7F8FB;
     --fontPrimary: 'Roboto', sans-serif;
     --fontSecondary:  'Oswald', sans-serif;
     --textColor: #111;
