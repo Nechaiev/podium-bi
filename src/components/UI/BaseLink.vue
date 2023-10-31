@@ -2,9 +2,11 @@
   <component
     :is="data.tag"
     :target="target"
+    :class="classes"
+    :variant="variant"
     v-bind="data.attrs"
-    :class="classes">
-    <slot/>
+  >
+    <slot></slot>
   </component>
 </template>
 
@@ -16,12 +18,12 @@ const props = defineProps({
   href: String,
   to: [Object, String],
   target: String,
-  color: {
+  variant: {
     type: String,
     validator(value) {
-      return ['base', 'secondary'].includes(value)
+      return ['header', 'secondary', 'footer'].includes(value)
     },
-    default: 'base'
+    default: 'header'
   }
 })
 
@@ -44,8 +46,9 @@ const data = computed(() => {
 
 const classes = computed(() => {
   return {
-    base: 'text-title_6 p-5 leading-none hover:text-primaryColor',
-    secondary: 'text-title_3 hover:text-green-500',
-  }[props.color]
+    header: 'text-title_5 inline-block p-5 leading-none hover:text-primaryColor',
+    secondary: "text-title_3 hover:text-green-500",
+    footer: 'text-title_5 hover:text-red-500 p-1'
+  }[props.variant]
 })
 </script>
