@@ -1,6 +1,8 @@
 <template>
   <header class=" bg-black text-white">
     <div class="flex w-full max-w-[1464px] mx-auto px-3 py-6 pr-[60px]">
+      <router-link to="/login" v-if="!isAuthenticated">Login</router-link>
+      <button @click="handleLogout" v-else>Logout</button>
       <app-logo class="mr-[-57px]"/>
       <base-nav :items="nav" variant="header"/>
     </div>
@@ -38,6 +40,14 @@
 import AppLogo from "@/components/UI/AppLogo.vue";
 import BaseLink from "@/components/UI/BaseLink.vue";
 import BaseNav from "@/components/UI/BaseNav.vue";
+import { computed } from "vue";
+import {useAuthStore} from "@/stores/store.js";
+
+const isAuthenticated = computed(() => useAuthStore().isAuthenticated);
+
+const handleLogout = () => {
+  useAuthStore().logout();
+};
 
 const nav = [
   {
