@@ -18,7 +18,8 @@ const router = createRouter({
     {
       path: '/blog',
       name: 'blog',
-      component: Blog
+      component: Blog,
+
     },
     {
       path: '/contact',
@@ -28,40 +29,35 @@ const router = createRouter({
     {
       path: '/podiumBiPortal',
       name: 'podiumBiPortal',
-      component: PodiumBiPortal
+      component: PodiumBiPortal,
+      meta: {
+        requiresAuth: true
+      },
     },
     {
       path: '/walmartRetailData',
       name: 'walmartRetailData',
       component: WalmartRetailData,
       meta: {
-        private: true,
+        requiresAuth: true
       },
     },
     {
       path: "/login",
       name: 'login',
       component: Login,
-      meta: {
-        requiresAuth: true
-      },
     },
   ]
 });
 
-router.beforeEach((to, from, next) => {
+router.beforeEach((to, from) => {
   const authStore = useAuthStore();
-  if (to.path !== "/login" && to.matched.some((record) => record.meta.requiresAuth)) {
-    if (!authStore.isAuthenticated) {
-      next({ path: "/login" });
-    } else {
-      next();
-    }
-  } else {
-    next();
+  if (to.path !== "/login"
+    && to.matched.some((record) => record.meta.requiresAuth)
+    && !authStore.isAuthenticated) {
+    return {path: "/login"};
   }
 });
-
 
 
 // add middleware to router
