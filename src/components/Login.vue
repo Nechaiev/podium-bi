@@ -13,7 +13,6 @@
 import { ref } from 'vue';
 import {useAuthStore} from "@/stores/store.js";
 
-
 const authStore = useAuthStore();
 
 const username = ref('');
@@ -22,5 +21,4 @@ const password = ref('');
 const handleLogin = () => {
   authStore.login(username.value, password.value);
 };
-
 </script>
