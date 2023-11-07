@@ -1,6 +1,6 @@
 <template>
   <footer
-    class="bg-black mt-auto pt-[300px] pb-[50px] text-white bg-[url('src/assets/img/gradient-footer.png')] bg-center-bottom bg-no-repeat bg-cover">
+    class="bg-black mt-auto pt-[300px] pb-[50px] text-white bg-[url('/assets/img/gradient-footer.png')] bg-center-bottom bg-no-repeat bg-cover">
     <div class="flex justify-between max-w-[1024px] px-3 mx-auto">
       <div class="flex flex-col justify-between">
         <app-logo class="pt-1"></app-logo>

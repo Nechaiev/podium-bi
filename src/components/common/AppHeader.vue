@@ -1,11 +1,31 @@
 <template>
   <header class=" bg-black text-white">
     <div class="flex w-full max-w-[1464px] mx-auto px-3 py-6 pr-[60px]">
-      <router-link to="/login" v-if="!isAuthenticated">Login</router-link>
-      <button @click="handleLogout" v-else>Logout</button>
-      <app-logo class="mr-[-57px]"/>
-      <base-nav :items="nav" variant="header"/>
+      <app-logo class="mr-[-57px]"></app-logo>
+      <base-nav :items="nav" variant="header"></base-nav>
+      <div class="grid justify-center items-center">
+        <button @click="authStore.onLogout" v-if="authStore.isAuth" class="whitespace-nowrap  hover:text-primaryColor">LogOut</button>
+        <template v-else>
+          <login-modal/>
+          <registration-modal/>
+        </template>
+      </div>
     </div>
+
+<!--  <header class=" bg-black text-white">-->
+<!--    <div class="flex w-full max-w-[1464px] mx-auto px-3 py-6 pr-[60px]">-->
+<!--&lt;!&ndash;      <router-link to="/login" v-if="!isAuthenticated">Login</router-link>&ndash;&gt;-->
+<!--&lt;!&ndash;      <button @click="handleLogout" v-else>Logout</button>&ndash;&gt;-->
+<!--      <app-logo class="mr-[-57px]"/>-->
+<!--      <base-nav :items="nav" variant="header"/>-->
+<!--      <div class="grid justify-center items-center">-->
+<!--        <button @click="authStore.onLogout" v-if="authStore.isAuth" class="whitespace-nowrap  hover:text-primaryColor">LogOut</button>-->
+<!--        <template v-else>-->
+<!--          <login-modal/>-->
+<!--          <registration-modal/>-->
+<!--        </template>-->
+<!--      </div>-->
+<!--    </div>-->
 <!--    <ul class="flex flex-wrap gap-3 justify-center px-8 mx-auto">-->
 <!--      <li>-->
 <!--        <base-link :to="{name: 'home'}">-->
@@ -41,10 +61,15 @@ import AppLogo from "@/components/UI/AppLogo.vue";
 import BaseLink from "@/components/UI/BaseLink.vue";
 import BaseNav from "@/components/UI/BaseNav.vue";
 import { computed } from "vue";
-import {useAuthStore} from "@/stores/store.js";
+// import {useAuthStore} from "@/stores/store.js";
+import RegistrationModal from "@/components/UI/RegistrationModal.vue";
+import RegistrationForm from "@/components/UI/RegistrationForm.vue";
+import LoginModal from "@/components/UI/LoginModal.vue";
+import useAuthStore from '@/stores/authStore.js'
 
-const isAuthenticated = computed(() => useAuthStore().isAuthenticated);
+// const isAuthenticated = computed(() => useAuthStore().isAuthenticated);
 
+const authStore = useAuthStore();
 const handleLogout = () => {
   useAuthStore().logout();
 };
@@ -75,6 +100,10 @@ const nav = [
   {
     text: 'Blog',
     to: {name: 'blog'}
+  },
+  {
+    text: 'EpisodesView',
+    to: {name: 'EpisodesView'}
   }
 ]
 </script>

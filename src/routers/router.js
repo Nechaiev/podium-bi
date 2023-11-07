@@ -5,6 +5,8 @@ import Contact from "@/views/Contact.vue";
 import PodiumBiPortal from "@/views/PodiumBiPortal.vue";
 import WalmartRetailData from "@/views/WalmartRetailData.vue";
 import {useAuthStore} from "@/stores/store.js";
+import RickSingle from "@/views/RickSingle.vue";
+import EpisodesView from "@/views/EpisodesView.vue";
 import Login from "@/components/Login.vue";
 
 const router = createRouter({
@@ -13,7 +15,20 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: Home
+      component: Home,
+    },
+    {
+      path: '/EpisodesView',
+      name: 'EpisodesView',
+      component: EpisodesView,
+    },
+    {
+      path: '/EpisodesView/:id',
+      name: 'RickSingle',
+      meta: {
+        isAuth: true,
+      },
+      component: RickSingle,
     },
     {
       path: '/blog',
@@ -42,22 +57,22 @@ const router = createRouter({
         requiresAuth: true
       },
     },
-    {
-      path: "/login",
-      name: 'login',
-      component: Login,
-    },
+    // {
+    //   path: "/login",
+    //   name: 'login',
+    //   component: Login,
+    // },
   ]
 });
 
-router.beforeEach((to, from) => {
-  const authStore = useAuthStore();
-  if (to.path !== "/login"
-    && to.matched.some((record) => record.meta.requiresAuth)
-    && !authStore.isAuthenticated) {
-    return {path: "/login"};
-  }
-});
+// router.beforeEach((to, from) => {
+//   const authStore = useAuthStore();
+//   if (to.path !== "/login"
+//     && to.matched.some((record) => record.meta.requiresAuth)
+//     && !authStore.isAuthenticated) {
+//     return {path: "/login"};
+//   }
+// });
 
 
 // add middleware to router
