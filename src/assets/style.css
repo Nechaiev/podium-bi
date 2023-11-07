@@ -3,7 +3,12 @@
 @tailwind utilities;
 
 body {
+
     font-family: var(--fontPrimary);
     color: var(--textColor);
     background-color: var(--bg-body);
+}
+
+html {
+    scroll-behavior: smooth;
 }
