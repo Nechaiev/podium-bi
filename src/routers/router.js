@@ -11,6 +11,13 @@ import Login from "@/components/Login.vue";
 
 const router = createRouter({
   history: createWebHistory(),
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition
+    } else {
+      return { top: 0 }
+    }
+  },
   routes: [
     {
       path: '/',
@@ -18,12 +25,12 @@ const router = createRouter({
       component: Home,
     },
     {
-      path: '/EpisodesView',
+      path: '/posts',
       name: 'EpisodesView',
       component: EpisodesView,
     },
     {
-      path: '/EpisodesView/:id',
+      path: '/posts/:id',
       name: 'RickSingle',
       meta: {
         isAuth: true,
