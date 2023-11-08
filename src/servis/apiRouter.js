@@ -1,6 +1,6 @@
 import apiClient from "./apiClient"
 
-const createApiRouter = (api = apiClient)=> {
+const createApiRouter = (api = apiClient) => {
   return {
     // episode: {
     //   index: (params)=> api.get("episode", {params}),
@@ -14,17 +14,22 @@ const createApiRouter = (api = apiClient)=> {
     //   show: (id)=> api.get(`courses/${id}`),
     // },
     posts: {
-      index: (params)=> api.get("posts", {params}),
-      show: (id)=> api.get(`posts/${id}`),
+      index: (params) => api.get("posts", {params}),
+      show: (id) => api.get(`posts/${id}`),
     },
     comments: {
-      index: (id, params)=> api.get(`/posts/${id}/comments`, {params}),
-      show: (id)=> api.get(`comments/${id}`),
+      index: (id, params) => api.get(`/posts/${id}/comments`, {params}),
+      show: (id) => api.get(`comments/${id}`),
     },
     albums: {
-      index: (params)=> api.get("comments", {params}),
-      show: (id)=> api.get(`comments/${id}`),
-    }
+      index: (params)=> api.get("albums", {params}),
+      show: (id)=> api.get(`albums/${id}`),
+      photos: {
+        index: (id, params) => api.get(`/albums/${id}/photos`, {params}),
+        show: (id) => api.get(`photos/${id}`),
+      }
+    },
+
   }
 }
 
