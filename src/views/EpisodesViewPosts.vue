@@ -33,7 +33,6 @@ const posts = computed(()=> postData.value?.results || [])
 const prev = computed(()=> postData.value?.info?.prev);
 const next = computed(()=> postData.value?.info?.next);
 
-
 const fetchData = async (url) => {
  const hand = await handler(() => ( url ? apiClient.get(url) : apiRouter.posts.index()));
   console.log(hand)

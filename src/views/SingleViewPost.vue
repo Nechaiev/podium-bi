@@ -3,9 +3,8 @@
     loading...
   </div>
   <div v-else class="container mx-auto">
-    <h1 class="text-3xl text-blue-700 italic p-5 border mb-5">Single post {{ post.id }}</h1>
+    <h1 class="text-3xl text-blue-700 italic p-5  mb-5">Single post {{ post.id }}</h1>
     <h2 class="text-2xl text-gray-800 font-bold mb-3">{{ post.title }}</h2>
-    <h3 class="text-lg text-gray-600 mb-5">{{ post.userId }}</h3>
     <div class="p-5 border bg-white text-gray-800">{{ post.body }}</div>
     <div class="comments mt-5">
       <h4 class="text-2xl text-gray-800 font-bold mb-3">Comments:</h4>
