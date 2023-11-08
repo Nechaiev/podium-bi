@@ -102,8 +102,8 @@ const nav = [
     to: {name: 'blog'}
   },
   {
-    text: 'EpisodesView',
-    to: {name: 'EpisodesView'}
+    text: 'EpisodesViewPosts',
+    to: {name: 'EpisodesViewPosts'}
   }
 ]
 </script>
