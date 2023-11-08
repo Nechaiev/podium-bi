@@ -5,8 +5,8 @@ import Contact from "@/views/Contact.vue";
 import PodiumBiPortal from "@/views/PodiumBiPortal.vue";
 import WalmartRetailData from "@/views/WalmartRetailData.vue";
 import {useAuthStore} from "@/stores/store.js";
-import RickSingle from "@/views/RickSingle.vue";
-import EpisodesView from "@/views/EpisodesView.vue";
+import SingleViewPost from "@/views/SingleViewPost.vue";
+import EpisodesViewPosts from "@/views/EpisodesViewPosts.vue";
 import Login from "@/components/Login.vue";
 
 const router = createRouter({
@@ -26,16 +26,16 @@ const router = createRouter({
     },
     {
       path: '/posts',
-      name: 'EpisodesView',
-      component: EpisodesView,
+      name: 'EpisodesViewPosts',
+      component: EpisodesViewPosts,
     },
     {
       path: '/posts/:id',
-      name: 'RickSingle',
+      name: 'SingleViewPost',
       meta: {
         isAuth: true,
       },
-      component: RickSingle,
+      component: SingleViewPost,
     },
     {
       path: '/blog',
