@@ -1,6 +1,8 @@
 import {defineStore} from "pinia"
 import {ref} from "vue";
-
+import useHandleLoadingAndError from "@/composables/useHandleLoadingAndError.js";
+import apiClient from "@/servis/apiClient.js";
+import apiRouter from "@/servis/apiRouter.js";
 // const storageKey = "users"
 // const getUsersStore = ()=> {
 //     const itemUsers = localStorage.getItem(storageKey)
@@ -13,16 +15,70 @@ import {ref} from "vue";
 
 const useAuthStore = defineStore('appAuth', () => {   //'appAuth' unique id. Can't be the same
   const users = ref([])
+  const newTaskArr = ref([])
   const isAuth = ref(false);
+  const newTask = ref("")
+  const usersData = ref(null)
+  const profile = ref({
+    id: 6,
+  })
+  const {handler, getData} = useHandleLoadingAndError()
+
+
 
   const setAuth = (auth) => {
     isAuth.value = auth
   }
 
   const getUser = (email) => {
+
     // return getUsersStore().find(item=> item.email === email)
     return users.value.find(item => item.email === email)
   }
+
+  /*<ToDoList>*/
+  const getToDoData = async (url) => {
+    if (!usersData.value) {
+      const res = await handler(url ? apiClient.get(url) : apiRouter.users.todos.index(profile.value.id))
+      usersData.value = getData(res)
+      newTaskArr.value.push(res)
+    }
+  };
+
+  const updateUserStatus = (user) => {
+    console.log('updateUserStatus');
+    user.completed = !user.completed;
+    // newTaskArr.value = newTaskArr.value.map((item) => {
+    //   if (item.id === user.id) {
+    //     return {
+    //       ...item,
+    //       completed: !user.completed,
+    //     }
+    //   }
+    //   return item
+    // })
+  };
+
+  const addTask = async (task) => {
+    if (task.trim() === '') {
+      return;
+    }
+
+    const newTaskTitle = task.replace(/\s+/g, ' ').trim()
+    const newTaskObject = {
+      title: newTaskTitle,
+      completed: false,
+    };
+    const res = await apiRouter.users.todos.create(profile.value.id, newTaskObject);
+    usersData.value.push(res.data);
+    return newTaskObject;
+  }
+
+  const removeTask = (taskId) => {
+    console.log('removeTask');
+    usersData.value = usersData.value.filter((user) => user.id !== taskId);
+  }
+  /*</ToDoList>*/
 
   /* onLogin*/
   const onLogin = async (form) => {
@@ -30,14 +86,18 @@ const useAuthStore = defineStore('appAuth', () => {   //'appAuth' unique id. Can
     await new Promise((resolve, reject) => {
       setTimeout(() => {
         const user = getUser(form.email)
+        console.log(typeof user);
         if (!user || form.password !== user.password) {
           return reject(new Error("invalid data"))
         }
         resolve(true);
+
       }, 1000);
     })
+
     isAuth.value = true;
     console.log(isAuth.value, form);
+    // console.log(mockAuth);
   }
 
   /*onLogout isAuth.value = false*/
@@ -66,12 +126,26 @@ const useAuthStore = defineStore('appAuth', () => {   //'appAuth' unique id. Can
     isAuth.value = true;
     console.log(isAuth);
   }
+
   return {
-    users, isAuth, setAuth, onLogin, onLogout, onRegister,
+    profile,
+    users,
+    isAuth,
+    usersData,
+    setAuth,
+    onLogin,
+    onLogout,
+    onRegister,
+    updateUserStatus,
+    removeTask,
+    addTask,
+    getToDoData
   }
+
 }, {
   persist: {
     paths: ['isAuth', 'users'],
   },
 })
+
 export default useAuthStore;

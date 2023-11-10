@@ -22,11 +22,20 @@ const createApiRouter = (api = apiClient) => {
       show: (id) => api.get(`comments/${id}`),
     },
     albums: {
-      index: (params)=> api.get("albums", {params}),
-      show: (id)=> api.get(`albums/${id}`),
+      index: (params) => api.get("albums", {params}),
+      show: (id) => api.get(`albums/${id}`),
       photos: {
         index: (id, params) => api.get(`/albums/${id}/photos`, {params}),
         show: (id) => api.get(`photos/${id}`),
+      }
+    },
+    users: {
+      index: (params) => api.get("users", {params}),
+      show: (id) => api.get(`users/${id}`),
+      todos: {
+        index: (id, params) => api.get(`users/${id}/todos`, {params}),
+        show: (id) => api.get(`todos/${id}`),
+        create: (id, data) => api.post( `users/${id}/todos`, data)
       }
     },
 

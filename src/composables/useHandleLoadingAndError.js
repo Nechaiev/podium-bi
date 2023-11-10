@@ -1,40 +1,37 @@
-import {ref} from "vue";
+import {ref} from 'vue'
 
-const defaultOptions = {
+export const getData = (data) => {
+  return data?.data || data
+}
+
+const defaulOptions = {
   loading: true,
   initData: {},
-  getData(data) {
-    return data?.data || data
-  }
+  getData
 }
-const useHandleLoadingAndError = (options = defaultOptions) => {
-  const mergeOptions = {
-    ...defaultOptions,
-    ...options
-  };
+
+const useHandleLoadingAndError = (options = defaulOptions) => {
+  const mergeOptions = {...defaulOptions, ...options};
   const loading = ref(mergeOptions.loading);
   const data = ref(mergeOptions.initData);
   const error = ref(null);
-  const handler = async (cb = () => Promise.resolve()) => {
+
+  const handler = async (callBack = () => Promise.resolve()) => { // callback = function || promise
     try {
       loading.value = true;
-      const res = await cb();
+      const res = await (typeof callBack === "function" ? callBack() : callBack);
       data.value = mergeOptions.getData(res)
     } catch (e) {
-      error.value = e;
+      error.value = e
     } finally {
       loading.value = false;
     }
     return {
       error: error.value,
-      data: data.value,
+      data: data.value
     }
   }
-  return {
-    loading,
-    data,
-    error,
-    handler,
-  }
-};
-export default useHandleLoadingAndError;
+  return {loading, data, error, handler, getData}
+}
+
+export default useHandleLoadingAndError

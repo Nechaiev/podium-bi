@@ -104,7 +104,11 @@ const nav = [
   {
     text: 'EpisodesViewPosts',
     to: {name: 'EpisodesViewPosts'}
-  }
+  },
+  {
+    text: 'ToDoList',
+    to: {name: 'ToDoList'}
+  },
 ]
 </script>
 

@@ -8,6 +8,7 @@ import {useAuthStore} from "@/stores/store.js";
 import SingleViewPost from "@/views/SingleViewPost.vue";
 import EpisodesViewPosts from "@/views/EpisodesViewPosts.vue";
 import Login from "@/components/Login.vue";
+import ToDoListView from "@/views/ToDoListView.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -15,7 +16,7 @@ const router = createRouter({
     if (savedPosition) {
       return savedPosition
     } else {
-      return { top: 0 }
+      return {top: 0}
     }
   },
   routes: [
@@ -63,6 +64,11 @@ const router = createRouter({
       meta: {
         requiresAuth: true
       },
+    },
+    {
+      path: '/to-do-list',
+      name: 'ToDoList',
+      component: ToDoListView,
     },
     // {
     //   path: "/login",
