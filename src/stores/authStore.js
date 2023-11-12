@@ -74,10 +74,23 @@ const useAuthStore = defineStore('appAuth', () => {   //'appAuth' unique id. Can
     return newTaskObject;
   }
 
-  const removeTask = (taskId) => {
+  const removeTask = async (taskId) => {
+    await handler(apiRouter.users.todos.delete(profile.value.id, taskId));
+
     const index = usersData.value.findIndex((user) => user.id === taskId);
     if (index !== -1) {
       usersData.value.splice(index, 1);
+    }
+  }
+
+  const updateTask = async (taskId) => {
+    // Виклик методу update з apiRouter
+    await handler(apiRouter.users.todos.update(profile.value.id, taskId));
+
+    // оновлення локального стану
+    const updatedTask = usersData.value.find((user) => user.id === taskId);
+    if (updatedTask) {
+      updatedTask.completed = !updatedTask.completed;
     }
   }
   /*</ToDoList>*/
