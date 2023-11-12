@@ -75,8 +75,10 @@ const useAuthStore = defineStore('appAuth', () => {   //'appAuth' unique id. Can
   }
 
   const removeTask = (taskId) => {
-    console.log('removeTask');
-    usersData.value = usersData.value.filter((user) => user.id !== taskId);
+    const index = usersData.value.findIndex((user) => user.id === taskId);
+    if (index !== -1) {
+      usersData.value.splice(index, 1);
+    }
   }
   /*</ToDoList>*/
 
