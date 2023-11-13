@@ -1,22 +1,45 @@
 <template>
-  <form @submit.prevent="onAddTask(newTask)"
+  <!-- v-slot="{ isSubmitting }" -->
+  <Form @submit="onSubmit"
+        :initialValues="initialValue"
+        :validationSchema="validationSchema"
         class="border border-cyan-800 p-7 w-full mw-[700px] mx-auto rounded-lg grid gap-5 mb-5">
     <h4 class="text-title_2">Add task:</h4>
-    <input name="title" class="border border-cyan-500 p-4 w-full rounded-lg" v-model="newTask">
-    <p>{{ newTask }}</p>
-    <button class="border border-green-500 p-4 w-full rounded-lg hover:bg-green-500">add item
+    <vee-valid-field
+      name="title"
+      label="Write task"
+    />
+    <button
+      class="border border-green-500 p-4 w-full disabled:bg-gray-500 rounded-lg hover:bg-green-500"
+      :disabled="loading"
+    >add item
     </button>
+
   </form>
 </template>
 <script setup>
-import useAuthStore from "@/stores/authStore.js"
-import {ref} from 'vue';
+import { Form } from "vee-validate";
+import * as yup from "yup";
+import useTodoStore from "@/stores/todoStore.js"
+import VeeValidField from "@/components/ui/VeeValidField.vue";
+import useHandleLoadingAndError from "@/composables/useHandleLoadingAndError.js";
 
-const newTask = ref("")
-const authStore = useAuthStore();
+const {loading, handler} = useHandleLoadingAndError();
+const todoStore = useTodoStore();
 
-const onAddTask = (task) => {
-  authStore.addTask(task)
-  newTask.value = ""
-}
+const initialValue = {
+  title: "",
+  completed: false,
+};
+
+const validationSchema = {
+  title: yup.string().required(),
+};
+
+const onSubmit = async (form, ctx) => {
+  const res = await handler(todoStore.addTask(form));
+  if(!res.error) {
+    ctx.resetForm()
+  }
+};
 </script>
