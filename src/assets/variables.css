@@ -1,14 +1,14 @@
-/*:root{*/
-/*    --primaryColor:   #0CC6B3;*/
-/*    --secondryColor:   #0f0;*/
-/*    --bg-body: #F7F8FB;*/
-/*    --fontPrimary: 'Roboto', sans-serif;*/
-/*    --fontSecondary:  'Oswald', sans-serif;*/
-/*    --textColor: #111;*/
-/*    --title_1: 128px;*/
-/*    --title_2: 40px;*/
-/*    --title_3: 36px;*/
-/*    --title_4: 32px;*/
-/*    --title_5: 24px;*/
-/*    --title_6: 20px;*/
-/*}*/
+:root{
+    --primaryColor:   #0CC6B3;
+    --secondryColor:   #0f0;
+    --fontPrimary: 'Roboto', sans-serif;
+    --textColor: #111;
+    --bgBody: #F7F8FB;
+
+    --title_1: 40px;
+    --title_2: 36px;
+    --title_3: 32px;
+    --title_4: 24px;
+    --title_5: 20px;
+    --title_6: 16px;
+}
