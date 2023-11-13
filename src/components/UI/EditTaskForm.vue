@@ -4,7 +4,7 @@
         @change="onChange"
   >
     <div class="absolute bg-gray-700/50 text-white inset-0 flex items-center justify-center z-10" v-if="loading">
-      Loading...
+      <BaseLoading :loadingStyle="'animation'"/>
     </div>
     <vee-valid-field
       name="title"
@@ -25,17 +25,18 @@
           </svg>
       </button>
     </div>
+
   </form>
 </template>
-
 <script setup>
 import {computed} from 'vue'
 import {useForm} from 'vee-validate';
 import * as yup from "yup";
 import VeeValidField from "@/components/ui/VeeValidField.vue";
-import ControlledField from "@/components/UI/ControlledField.vue";
-import useAuthStore from "@/stores/authStore.js"
+import ControlledField from "@/components/ui/ControlledField.vue";
+import useTodoStore from "@/stores/todoStore.js"
 import useHandleLoadingAndError from "@/composables/useHandleLoadingAndError.js";
+import BaseLoading from "@/components/UI/BaseLoading.vue";
 
 const props = defineProps({
   title: String,
@@ -43,10 +44,10 @@ const props = defineProps({
   toDoId: Number,
 })
 
-const authStore = useAuthStore();
+const todoStore = useTodoStore();
 const {loading, handler} = useHandleLoadingAndError();
 
-const initialValues = computed(() => {
+const initialValues = computed(()=>{
   return {
     title: props.title,
     completed: props.completed,
@@ -59,11 +60,12 @@ const validationSchema = {
 
 const {values} = useForm({validationSchema, initialValues})
 
-const onChange = () => {
-  handler(authStore.updateTask(props.toDoId, values))
+const onChange =()=> {
+  handler(todoStore.updateTask(props.toDoId, values))
 }
 
 const onRemoveTask = () => {
-  handler(authStore.removeTask(props.toDoId))
+  handler(todoStore.removeTask(props.toDoId))
 }
+
 </script>
