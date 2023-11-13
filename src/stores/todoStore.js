@@ -33,7 +33,7 @@ const useTodoStore = defineStore('todoStore', () => {   //'todoStore' unique id.
 
   const removeTask = async (taskId) => {
     // Виклик методу delete з apiRouter
-    await apiRouter.users.todos.delete(authStore.profile.value.id, taskId);
+    await apiRouter.users.todos.delete(authStore.profile.id, taskId);
     const index = tasks.value.findIndex((user) => user.id === taskId);
     if (index !== -1) {
       tasks.value.splice(index, 1);
