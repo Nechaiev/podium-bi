@@ -5,7 +5,7 @@ export const getData = (data) => {
 }
 
 const defaulOptions = {
-  loading: true,
+  loading: false,
   initData: {},
   getData
 }
