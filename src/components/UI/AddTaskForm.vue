@@ -7,18 +7,22 @@
     <h4 class="text-title_2">Add task:</h4>
     <vee-valid-field
       name="title"
+      placeholder="Add task"
       label="Write task"
+      id="TEST"
+      labelForInput="TEST"
+      labelPosition="BottomLeft"
+      classes="case3"
     />
     <button
       class="border border-green-500 p-4 w-full disabled:bg-gray-500 rounded-lg hover:bg-green-500"
       :disabled="loading"
     >add item
     </button>
-
-  </form>
+  </Form>
 </template>
 <script setup>
-import { Form } from "vee-validate";
+import {Form} from "vee-validate";
 import * as yup from "yup";
 import useTodoStore from "@/stores/todoStore.js"
 import VeeValidField from "@/components/ui/VeeValidField.vue";
@@ -38,7 +42,7 @@ const validationSchema = {
 
 const onSubmit = async (form, ctx) => {
   const res = await handler(todoStore.addTask(form));
-  if(!res.error) {
+  if (!res.error) {
     ctx.resetForm()
   }
 };

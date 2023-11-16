@@ -3,14 +3,16 @@
         @submit.prevent
         @change="onChange"
   >
-    <div class="absolute bg-gray-700/50 text-white inset-0 flex items-center justify-center z-10" v-if="loading">
-      <BaseLoading :loadingStyle="'animation'"/>
-    </div>
+    <!-- <div class="absolute bg-gray-700/50 text-white inset-0 flex items-center justify-center z-10" v-if="loading">
+        <BaseLoading :loadingStyle="'animation'"/>
+    </div> -->
     <vee-valid-field
       name="title"
     />
     <controlled-field
       name="completed"
+      label="label"
+      :id="'userId-' + toDoId"
     />
     <div class="relative flex cursor-pointer items-center rounded-full p-3">
       <button
@@ -29,14 +31,13 @@
   </form>
 </template>
 <script setup>
-import {computed} from 'vue'
+import {computed, ref} from 'vue'
 import {useForm} from 'vee-validate';
 import * as yup from "yup";
 import VeeValidField from "@/components/ui/VeeValidField.vue";
 import ControlledField from "@/components/ui/ControlledField.vue";
 import useTodoStore from "@/stores/todoStore.js"
 import useHandleLoadingAndError from "@/composables/useHandleLoadingAndError.js";
-import BaseLoading from "@/components/UI/BaseLoading.vue";
 
 const props = defineProps({
   title: String,
@@ -47,7 +48,7 @@ const props = defineProps({
 const todoStore = useTodoStore();
 const {loading, handler} = useHandleLoadingAndError();
 
-const initialValues = computed(()=>{
+const initialValues = computed(() => {
   return {
     title: props.title,
     completed: props.completed,
@@ -60,12 +61,11 @@ const validationSchema = {
 
 const {values} = useForm({validationSchema, initialValues})
 
-const onChange =()=> {
+const onChange = () => {
   handler(todoStore.updateTask(props.toDoId, values))
 }
 
 const onRemoveTask = () => {
   handler(todoStore.removeTask(props.toDoId))
 }
-
 </script>

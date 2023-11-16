@@ -1,10 +1,11 @@
 <template>
-  <div :class="loadingStyle">
+  <div class="text-title_4" :class="loadingStyle">
     Loading...
   </div>
 </template>
 <script setup>
 import {computed} from 'vue';
+
 const props = defineProps({
   text: String,
   loadingStyle: {

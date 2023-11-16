@@ -1,9 +1,10 @@
+@import url(variables.css);
+@import '@fortawesome/fontawesome-free/css/all.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 body {
-
     font-family: var(--fontPrimary);
     color: var(--textColor);
     background-color: var(--bg-body);
