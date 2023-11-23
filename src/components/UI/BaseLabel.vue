@@ -3,13 +3,13 @@
     :class="labelPosition"
     :for="labelForInput"
   >
-    {{ label }}
+    {{ labelForInput }}
   </label>
 </template>
 
 <script setup>
 defineProps({
-  label: String,
+  labelForInput: String,
   labelPosition: String,
 });
 </script>
