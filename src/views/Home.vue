@@ -1,20 +1,19 @@
 <template>
   <TemplateFirstScreen/>
+  <BaseForm/>
   <section class="mb-24">
     <div class="container mx-auto px-4 max-w-[986px]">
       <AccordionWrapper :items="accordionList">
         <template #body="{bodyClass, item}">
-          <div
-            class="relative grid grid-cols-[1fr_1fr] gap-[30px] items-center before:absolute before:inline-block before:top-0 before:left-[30px] before:w-[calc(100%-60px)] before:h-[2px]"
-            :class="bodyClass">
+          <div class="relative grid grid-cols-[1fr_1fr] gap-[30px] items-center before:absolute before:inline-block before:top-0 before:left-[30px] before:w-[calc(100%-60px)] before:h-[2px]" :class="bodyClass">
             <div>
               <h5 class="text-title_5 mb-[30px]">
-                {{ item.content.description }}
+                {{item.content.description}}
               </h5>
-              <PrepareButton> {{ item.content.button }}</PrepareButton>
+              <PrepareButton> {{item.content.button}}</PrepareButton>
             </div>
             <div>
-              <img :src="item.content.img"/>
+              <img :src="item.content.img" />
             </div>
           </div>
         </template>
@@ -24,9 +23,10 @@
 </template>
 
 <script setup>
-import PrepareButton from "@/components/PrepareButton.vue";
 import TemplateFirstScreen from "@/components/TemplateFirstScreen.vue";
 import AccordionWrapper from "@/components/AccordionWrapper.vue";
+import PrepareButton from "@/components/PrepareButton.vue";
+import BaseForm from "@/components/ui/BaseForm.vue";
 
 const accordionList = [
   {
@@ -35,7 +35,7 @@ const accordionList = [
     content: {
       description: '2. The Podium BI tool is the solution to removing the complexity of managing all of your Power BI content easily.',
       button: 'start for free 1',
-      img: '/public/assets/img/accordion-1.png',
+      img: '/assets/img/accordion-1.png',
       alt: "Ultimate"
     },
   },
@@ -45,7 +45,7 @@ const accordionList = [
     content: {
       description: '1. The Podium BI tool is the solution to removing the complexity of managing all of your Power BI content easily.',
       button: 'start for free 2',
-      img: '/public/assets/img/accordion-1.png',
+      img: '/assets/img/accordion-1.png',
       alt: "solution"
     },
   },
@@ -55,13 +55,12 @@ const accordionList = [
     content: {
       description: '3. The Podium BI tool is the solution to removing the complexity of managing all of your Power BI content easily.',
       button: 'start for free 3',
-      img: '/public/assets/img/accordion-1.png',
+      img: '/assets/img/accordion-1.png',
       alt: "PodiumBI"
     },
   },
 ];
 </script>
-
 <style>
 .relative.grid.grid-cols-\[1fr_1fr\].gap-\[30px\].items-center.bg-white.p-\[30px\].overflow-hidden:before {
   background: linear-gradient(90deg, rgba(217, 217, 217, 0.00) 0%, #D9D9D9 50%, rgba(217, 217, 217, 0.00) 100%);
