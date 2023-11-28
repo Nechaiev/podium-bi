@@ -50,7 +50,7 @@ const {handleChange, checked} = useField(() => props.name, undefined, {
 </script>
 
 <style>
-input[type="checkbox"] {
+/* input[type="checkbox"] {
   display: none;
 }
 
@@ -78,5 +78,5 @@ input[type="checkbox"] + label:before {
 
 input[type="checkbox"]:checked + label:before {
   content: "\2713";
-}
+} */
 </style>
