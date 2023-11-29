@@ -6,10 +6,10 @@ const getMessageErrorByResponse = (error) => {
     return MessagesError.unauthenticated;
   }
   let message =
-    error?.response?.data?.message ||
-    error?.response?.message ||
-    error?.statusMessage ||
-    error?.message;
+      error?.response?.data?.message ||
+      error?.response?.message ||
+      error?.statusMessage ||
+      error?.message;
 
   if (MessagesError[message]) {
     message = MessagesError[message];

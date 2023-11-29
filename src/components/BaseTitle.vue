@@ -1,3 +1,4 @@
+
 <template>
   <div class="text-center mb-[60px]">
     <h1 :class="classes">{{ title }}</h1>
@@ -19,7 +20,7 @@ const props = defineProps({
     },
     default: 'default',
   }
-
+   
 })
 
 const classes = computed(()=>{

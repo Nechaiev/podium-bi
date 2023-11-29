@@ -1,20 +1,12 @@
 <template>
   <div class="flex flex-col min-h-[100vh]">
-    <app-header/>
-
+    
+    <AppHeader/>
     <main>
       <slot/>
     </main>
-
-    <app-footer/>
+    <AppFooter/>
   </div>
 </template>
 
-<script setup>
-import AppHeader from "@/components/common/AppHeader.vue";
-import AppFooter from "@/components/common/AppFooter.vue";
-</script>
-
-<style scoped>
-
-</style>
+ 

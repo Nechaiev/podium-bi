@@ -19,7 +19,7 @@ const MessagesError = {
   alphaDash:
     'This field may contain alphabetic characters, numbers, dashes or underscores. No spaces.',
   url: 'URL is not valid',
-  "credentials.invalid": "Не валідний пароль або емеіл"
+  "credentials.invalid" : "Не валідний пароль або емеіл"
 }
 
 export default MessagesError;

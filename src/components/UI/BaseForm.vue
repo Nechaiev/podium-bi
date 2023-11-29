@@ -2,28 +2,28 @@
   <div>
     danny@neweradrugtesting.com
     <form
-      @submit="onSubmit"
-      class="flex flex-col items-center border-2 px-6 py-10 max-w-xl mx-auto mb-6 rounded-[4px]"
+        @submit="onSubmit"
+        class="flex flex-col items-center border-2 px-6 py-10 max-w-xl mx-auto mb-6 rounded-[4px]"
     >
       <text-field
-        type="email"
-        name="email"
-        label="Email"
-        placeholder="Your email"
+          type="email"
+          name="email"
+          label="Email"
+          placeholder="Your email"
 
       />
       <password-field
-        :type="showPassword ? 'text' : 'password'"
-        name="password"
-        label="password"
-        placeholder="Your password"
+          :type="showPassword ? 'text' : 'password'"
+          name="password"
+          label="password"
+          placeholder="Your password"
       />
       <div class="flex items-center my-2">
         <input
-          type="checkbox"
-          class="form-checkbox h-5 w-5 text-green-500"
-          id="togglePassword"
-          v-model="showPassword"
+            type="checkbox"
+            class="form-checkbox h-5 w-5 text-green-500"
+            id="togglePassword"
+            v-model="showPassword"
         />
         <label for="togglePassword" class="ml-2">Show Password</label>
       </div>
@@ -33,9 +33,9 @@
 
     <teleport to="body">
       <BaseModal
-        :open-modal="openModal"
-        @confirm="submitForm"
-        @update:open-modal="onChangeModal"
+          :open-modal="openModal"
+          @confirm="submitForm"
+          @update:open-modal="onChangeModal"
       />
     </teleport>
     <div class="flex justify-center my-12">
@@ -52,7 +52,7 @@ import TextField from "@/components/ui/TextField.vue";
 import PasswordField from "@/components/ui/PasswordField.vue";
 import BaseModal from "@/components/ui/BaseModal.vue";
 import BaseButton from "@/components/ui/BaseButton.vue";
-import apiRouter from "@/servis/apiRouter.js";
+import apiRouter from "@/api/apiRouter.js";
 import useHandleLoadingAndError from "@/composables/useHandleLoadingAndError";
 import useAuthStore from '@/stores/authStore.js'
 

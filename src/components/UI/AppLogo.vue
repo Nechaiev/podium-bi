@@ -1,9 +1,14 @@
 <template>
-  <router-link to="/" class="text-pink-600">
-    <IconLogo/>
-  </router-link>
+  <RouterLink to="/" class="flex items-center">
+    <Logo />
+  </RouterLink>
 </template>
 
 <script setup>
-import IconLogo from "@/components/UI/icons/Logo.vue";
+import {RouterLink} from 'vue-router'
+import Logo from "@/components/ui/icons/Logo.vue"
 </script>
+
+<style scoped>
+
+</style>

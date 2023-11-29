@@ -1,10 +1,9 @@
 <template>
   <div class="z-10">
     <BaseButton @click="togglePopup">open popUp</BaseButton>
-    <transition name="fade" class="transition-opacity">
-      <div v-if="isPopupVisible" :class="popupPosition"
-           class="fixed bg-white p-8 border border-gray-300 shadow-md transition-transform duration-500 ease-out">
-        <span @click="togglePopup" class="absolute top-2 right-2 cursor-pointer text-gray-500">&times;</span>
+    <transition name="fade"  class="transition-opacity">
+      <div v-if="isPopupVisible" :class="popupPosition" class="fixed bg-white p-8 border border-gray-300 shadow-md transition-transform duration-500 ease-out">
+          <span @click="togglePopup" class="absolute top-2 right-2 cursor-pointer text-gray-500">&times;</span>
         <slot/>
       </div>
     </transition>
@@ -14,12 +13,9 @@
 <script setup>
 import BaseButton from "@/components/ui/BaseButton.vue";
 import {computed, ref} from "vue";
-
 const isPopupVisible = ref(false);
-
-const togglePopup = () => {
-  isPopupVisible.value = !isPopupVisible.value;
-};
+// import useAuthStore from '@/stores/authStore.js'
+// const authStore = useAuthStore();
 
 const props = defineProps({
   popupPosition: {
@@ -28,8 +24,21 @@ const props = defineProps({
       return ['center', 'topLeft', 'topRight', 'bottomRight', 'bottomLeft'].includes(value)
     },
     default: 'center',
-  }
+  },
+  openPopup: Boolean,
 })
+
+
+const togglePopup = () => {
+
+  isPopupVisible.value = !isPopupVisible.value;
+};
+
+
+
+
+
+
 
 const popupPosition = computed(() => {
   return {
@@ -41,13 +50,13 @@ const popupPosition = computed(() => {
   } [props.popupPosition]
 })
 
+
 </script>
 
 <style scoped>
 .fade-enter-active, .fade-leave-active {
   transition: opacity 0.5s;
 }
-
 .fade-enter, .fade-leave-to {
   opacity: 0;
 }

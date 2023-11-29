@@ -1,7 +1,9 @@
 <template>
+
   <svg
-    class="h-5 w-5 ml-2"
-    width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+      class="h-5 w-5 ml-2"
+      width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <path d="M0.375 12.84H12.375V0.84H0.375V12.84Z" fill="url(#pattern5)"/>
     <defs>
       <pattern id="pattern5" patternContentUnits="objectBoundingBox" width="1" height="1">
@@ -17,3 +19,7 @@ export default {
   name: "iconMagic"
 }
 </script>
+
+<style scoped>
+
+</style>

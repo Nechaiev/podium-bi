@@ -1,6 +1,6 @@
 import {defineStore} from "pinia"
 import {ref} from "vue";
-import apiRouter from "@/servis/apiRouter.js";
+import apiRouter from "@/api/apiRouter.js";
 import useAuthStore from "@/stores/authStore.js"
 
 const useTodoStore = defineStore('todoStore', () => {   //'todoStore' unique id. Can't be the same
@@ -9,16 +9,16 @@ const useTodoStore = defineStore('todoStore', () => {   //'todoStore' unique id.
 
   /*<>*/
   const getToDoData = async () => {
-    const res = await apiRouter.users.todos.index(authStore.profile.id)
-    tasks.value = res.data
+      const res = await apiRouter.users.todos.index(authStore.profile.id)
+      tasks.value= res.data
   };
 
   const addTask = async (form) => {
     const res = await apiRouter.users.todos.create(authStore.profile.id, form);
-    const lastItemId = tasks.value[tasks.value.length - 1].id;
-    const newItam = {
+    const lastItemId = tasks.value[tasks.value.length -1].id;
+    const newItam = { 
       ...res.data,
-      id: lastItemId >= res.data.id ? lastItemId + 1 : res.data.id
+      id: lastItemId >= res.data.id ?  lastItemId + 1 : res.data.id
     }
 
     tasks.value.push(newItam);
@@ -32,7 +32,6 @@ const useTodoStore = defineStore('todoStore', () => {   //'todoStore' unique id.
   }
 
   const removeTask = async (taskId) => {
-    // Виклик методу delete з apiRouter
     await apiRouter.users.todos.delete(authStore.profile.id, taskId);
     const index = tasks.value.findIndex((user) => user.id === taskId);
     if (index !== -1) {
@@ -42,8 +41,8 @@ const useTodoStore = defineStore('todoStore', () => {   //'todoStore' unique id.
 
   return {
     tasks,
-    addTask,
     getToDoData,
+    addTask,
     updateTask,
     removeTask,
   }

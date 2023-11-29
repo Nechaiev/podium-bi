@@ -4,8 +4,8 @@
   <Teleport to="body">
     <div v-if="open" class="modal fixed top-0 left-0 z-50 w-full h-full flex items-center justify-center bg-white text-black">
       <div class="overlay w-full h-full flex items-center justify-center">
-        <LoginForm @onCloseModal="closeModal"/>
-
+          <LoginForm @onCloseModal="closeModal"/>
+        
       </div>
     </div>
   </Teleport>

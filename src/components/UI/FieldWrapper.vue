@@ -1,6 +1,6 @@
 <template>
-  <div :class="wrapperClass">
-    <slot/>
+  <div :class="wrapperClass" >
+    <slot />
     <label v-if="label" :class="labelClass">
       {{ label }}
     </label>
@@ -11,7 +11,7 @@
 </template>
 
 <script setup>
-import {computed} from "vue";
+import { computed } from "vue";
 
 const props = defineProps({
   errors: [String, Array],
@@ -54,15 +54,17 @@ const wrapperClass = computed(() => {
   ];
 });
 
-const labelClass = computed(() => {
-  return [
-    "pointer-events-none",
-    "bg-white",
-    "left-3",
-    {
-      "top-0": props.labelPosition === "top",
-      "right-0": props.labelPosition === "right",
-    },
-  ];
-});
-</script>>
+ const labelClass = computed(() => {
+   return [
+     "pointer-events-none",
+     "bg-white",
+     "left-3",
+     {
+       "top-0": props.labelPosition === "top",
+       "right-0": props.labelPosition === "right",
+     },
+   ];
+ });
+
+
+</script>

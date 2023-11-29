@@ -15,7 +15,7 @@
 <script setup>
 import { ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
-import apiRouter from '@/servis/apiRouter'
+import apiRouter from '@/api/apiRouter'
 import useHandleLoadingAndError from '@/composables/useHandleLoadingAndError'
 import { useSingleCoursesStore } from '@/stores/singleCoursesStore';
 

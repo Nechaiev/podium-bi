@@ -2,8 +2,8 @@ import {defineStore} from "pinia";
 import {ref} from "vue";
 import { useRoute } from 'vue-router';
 import { getData } from "@/composables/useHandleLoadingAndError";
-import apiRouter from '@/servis/apiRouter';
-import apiClient from "@/servis/apiClient";
+import apiRouter from '@/api/apiRouter';
+import apiClient from "@/api/apiClient";
 
 export const useSingleCoursesStore = defineStore('singleCoursesStore', () => {
   const singleCoursesData = ref(null)
@@ -20,3 +20,5 @@ export const useSingleCoursesStore = defineStore('singleCoursesStore', () => {
 
   return getCourses
 })
+
+ 
