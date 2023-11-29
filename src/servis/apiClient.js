@@ -1,5 +1,6 @@
 import axios from 'axios'
 import {getCookie} from "@/utils";
+import useAuthStore from "@/stores/authStore";
 
 export const apiURL = 'https://s.staging.yourcourses.kalyna.dev'
 
@@ -12,6 +13,10 @@ const apiClient = axios.create({
 })
 
 apiClient.interceptors.response.use((res)=> res, error => {
+  if(error.response.status === 401) {
+    console.log("Не авторизований")
+    useAuthStore().reset();
+  }
   console.log("apiClient.interceptors >>>",error);
   return Promise.reject(error)
 } );

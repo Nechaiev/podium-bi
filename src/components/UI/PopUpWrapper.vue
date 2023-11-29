@@ -1,11 +1,13 @@
 <template>
-  <transition-group class="flex flex-col">
+<div class="flex flex-col">
+  <transition-group >
     <BasePopup :popupPosition="popupPosition">
       <template #default>
         <slot name="body"/>
       </template>
     </BasePopup>
   </transition-group>
+</div>
 </template>
 
 <script setup>

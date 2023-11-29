@@ -1,6 +1,5 @@
 import {ref} from 'vue'
 import MessagesError from '@/globals/MessagesError.js'
-
 const getMessageErrorByResponse = (error) => {
   const status = error?.response?.status || error?.statusCode;
   if (status === 401) {
@@ -18,8 +17,8 @@ const getMessageErrorByResponse = (error) => {
   return message || MessagesError.somethingWentWrong;
 };
 
-export const getData = (data) => {
-  return data?.data || data
+export const getData = (res) => {
+  return res?.data?.data || res?.data || res
 }
 
 const defaulOptions = {

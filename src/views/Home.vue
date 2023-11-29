@@ -1,32 +1,53 @@
 <template>
-  <TemplateFirstScreen/>
-  <BaseForm/>
-  <section class="mb-24">
-    <div class="container mx-auto px-4 max-w-[986px]">
-      <AccordionWrapper :items="accordionList">
-        <template #body="{bodyClass, item}">
-          <div class="relative grid grid-cols-[1fr_1fr] gap-[30px] items-center before:absolute before:inline-block before:top-0 before:left-[30px] before:w-[calc(100%-60px)] before:h-[2px]" :class="bodyClass">
-            <div>
-              <h5 class="text-title_5 mb-[30px]">
-                {{item.content.description}}
-              </h5>
-              <PrepareButton> {{item.content.button}}</PrepareButton>
-            </div>
-            <div>
-              <img :src="item.content.img" />
-            </div>
-          </div>
-        </template>
-      </AccordionWrapper>
-    </div>
-  </section>
+  <!--    <TemplateFirstScreen/>-->
+  <BaseForm @showModal="setOpenPopup"/>
+  <BasePopup :openPopup="openPopup"/>
+  <!--      <PopUpWrapper popupPosition="topRight">-->
+  <!--        <template #body>-->
+  <!--          <div> -->
+  <!--            <div>-->
+  <!--              <h5 class="text-title_5 mb-[30px]">-->
+  <!--                  Good work!-->
+  <!--              </h5>-->
+  <!--            </div>-->
+  <!--            <div>-->
+  <!--              <img src="https://placehold.co/400" alt="img"/>-->
+  <!--            </div>-->
+  <!--          </div>-->
+  <!--        </template>-->
+  <!--      </PopUpWrapper>-->
+  <!--    <section class="mb-24">
+        <div class="container mx-auto px-4 max-w-[986px]">
+          <AccordionWrapper :items="accordionList">
+            <template #body="{bodyClass, item}">
+              <div class="relative grid grid-cols-[1fr_1fr] gap-[30px] items-center before:absolute before:inline-block before:top-0 before:left-[30px] before:w-[calc(100%-60px)] before:h-[2px]" :class="bodyClass">
+                <div>
+                  <h5 class="text-title_5 mb-[30px]">
+                    {{item.content.description}}
+                  </h5>
+                  <PrepareButton> {{item.content.button}}</PrepareButton>
+                </div>
+                <div>
+                  <img :src="item.content.img" />
+                </div>
+              </div>
+            </template>
+          </AccordionWrapper>
+        </div>
+      </section>-->
 </template>
 
 <script setup>
-import TemplateFirstScreen from "@/components/TemplateFirstScreen.vue";
-import AccordionWrapper from "@/components/AccordionWrapper.vue";
-import PrepareButton from "@/components/PrepareButton.vue";
+
 import BaseForm from "@/components/ui/BaseForm.vue";
+import BasePopup from "@/components/ui/BasePopup.vue";
+import {ref} from "vue";
+
+const openPopup = ref(false);
+
+const setOpenPopup = () => {
+  openPopup.value = true;
+}
 
 const accordionList = [
   {

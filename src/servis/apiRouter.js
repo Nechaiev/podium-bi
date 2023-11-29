@@ -13,15 +13,6 @@ const createApiRouter = (api = apiClient) => {
     //   index: (params)=> api.get("courses", {params}),
     //   show: (id)=> api.get(`courses/${id}`),
     // },
-    auth: {
-      login: async (data)=> {
-        await getCSRF()
-        console.log(data)
-        /*після успішного виконання логіну, треба в локас-сторедж записати що юзер авторизований*/
-        return await api.post("/login", data)
-      },
-      me: ()=> api.get("/me") //запит, якщо залогинений
-    },
     posts: {
       index: (params) => api.get("posts", {params}),
       show: (id) => api.get(`posts/${id}`),
@@ -37,6 +28,21 @@ const createApiRouter = (api = apiClient) => {
         index: (id, params) => api.get(`/albums/${id}/photos`, {params}),
         show: (id) => api.get(`photos/${id}`),
       }
+    },
+    admin: {
+      courses: {
+        index: (params)=>api.get("/admin/courses/", {params}),
+        show: (courseId)=>api.get("/admin/courses/" + courseId),
+      },
+    },
+    auth: {
+      login: async (data)=> {
+        await getCSRF()
+        /*після успішного виконання логіну, треба в локас-сторедж записати що юзер авторизований*/
+        return await api.post("/login", data)
+      },
+      me: ()=> api.get("/me"), //запит, якщо залогинений
+      logout: ()=> api.post("/logout"),
     },
     users: {
       index: (params) => api.get("users", {params}),

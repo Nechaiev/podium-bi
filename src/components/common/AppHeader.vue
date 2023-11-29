@@ -100,6 +100,10 @@ const nav = [
     to: {name: 'contact'}
   },
   {
+    text: 'courses',
+    to: {name: 'courses'}
+  },
+  {
     text: 'Blog',
     to: {name: 'blog'}
   },

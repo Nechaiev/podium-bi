@@ -1,5 +1,6 @@
 <template>
   <div>
+    danny@neweradrugtesting.com
     <form
       @submit="onSubmit"
       class="flex flex-col items-center border-2 px-6 py-10 max-w-xl mx-auto mb-6 rounded-[4px]"
@@ -9,6 +10,7 @@
         name="email"
         label="Email"
         placeholder="Your email"
+
       />
       <password-field
         :type="showPassword ? 'text' : 'password'"
@@ -28,6 +30,7 @@
       <BaseButton :disabled="loading">Submit</BaseButton>
       <pre>{{ error }}</pre>
     </form>
+
     <teleport to="body">
       <BaseModal
         :open-modal="openModal"
@@ -36,45 +39,29 @@
       />
     </teleport>
     <div class="flex justify-center my-12">
-      <PopUpWrapper popupPosition="topRight">
-        <template #body>
-          <div>
-            <div>
-              <h5 class="text-title_5 mb-[30px]">
-                Good work!
-              </h5>
-            </div>
-            <div>
-              <img src="https://placehold.co/400" alt="img"/>
-            </div>
-          </div>
-        </template>
-      </PopUpWrapper>
+
+
     </div>
   </div>
 </template>
-
 <script setup>
-import {ref, provide} from "vue";
+import { ref } from "vue";
 import * as yup from "yup";
-import {useForm} from "vee-validate";
+import { useForm } from "vee-validate";
 import TextField from "@/components/ui/TextField.vue";
 import PasswordField from "@/components/ui/PasswordField.vue";
 import BaseModal from "@/components/ui/BaseModal.vue";
 import BaseButton from "@/components/ui/BaseButton.vue";
 import apiRouter from "@/servis/apiRouter.js";
-import BasePopup from "@/components/ui/BasePopup.vue";
-import PopUpWrapper from "@/components/ui/PopUpWrapper.vue"
 import useHandleLoadingAndError from "@/composables/useHandleLoadingAndError";
 import useAuthStore from '@/stores/authStore.js'
-
-const authStore = useAuthStore();
-
 
 defineProps({
   modelValue: String,
 });
 
+const emit = defineEmits(['showModal'])
+const authStore = useAuthStore();
 const showPassword = ref(false);
 const openModal = ref(false);
 
@@ -83,7 +70,7 @@ const initialValue = {
   password: "",
 };
 
-const {handleSubmit, values, errors, resetForm} = useForm({
+const { handleSubmit, values, resetForm } = useForm({
   initialValues: initialValue,
   validationSchema: yup.object({
     email: yup.string().required().email(),
@@ -93,10 +80,13 @@ const {handleSubmit, values, errors, resetForm} = useForm({
 
 const submitForm = async () => {
   loading.value = true;
+
   try {
     await apiRouter.auth.login(values)
+
     resetForm();
   } catch (error) {
+
     console.log(error);
   } finally {
     loading.value = false;
@@ -105,14 +95,15 @@ const submitForm = async () => {
 const onChangeModal = (newVal) => {
   openModal.value = newVal;
 };
+
 const {handler, loading, error} = useHandleLoadingAndError()
 
-const onSubmit = handleSubmit(async (data, {resetForm}) => {
-  const res = await handler(apiRouter.auth.login(data))
-  authStore.usersName = res.data.data.first_name
-  console.log(authStore.usersName)
+const onSubmit =  handleSubmit(async (data, {resetForm}) => {
+  const res =  await handler(authStore.logIn(data))
+
   if (!res.error) {
+    emit('showModal')
     resetForm()
   }
-})
+});
 </script>

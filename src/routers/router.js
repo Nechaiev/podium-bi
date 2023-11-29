@@ -9,6 +9,9 @@ import SingleViewPost from "@/views/SingleViewPost.vue";
 import EpisodesViewPosts from "@/views/EpisodesViewPosts.vue";
 import Login from "@/components/Login.vue";
 import ToDoListView from "@/views/ToDoListView.vue";
+import LoginView from '@/views/LoginView.vue'
+import CoursesView from '@/views/CoursesView.vue'
+import SingleCoursesView from "@/views/SingleCoursesView.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -70,6 +73,22 @@ const router = createRouter({
       name: 'ToDoList',
       component: ToDoListView,
     },
+    {
+      path: '/courses',
+      name: 'courses',
+      component: CoursesView,
+      meta: {
+        private: true,
+      },
+    },
+    {
+      path: '/courses/:id',
+      name: 'SingleCourses',
+      component: SingleCoursesView,
+      meta: {
+        private: true,
+      },
+    },
     // {
     //   path: "/login",
     //   name: 'login',
@@ -90,7 +109,15 @@ const router = createRouter({
 
 // add middleware to router
 // window.isAuth = true;
-
+window.isAuth = true;
+router.beforeEach((to, from, next) => {
+  if (to.meta.private && !window.isAuth) {
+    console.log(to.meta);
+    next('/login');
+  } else {
+    next();
+  }
+})
 // router.beforeEach((to, from) => {
 //   console.log(to, from)
 //   if (to.meta.private) {
