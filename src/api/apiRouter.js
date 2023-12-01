@@ -24,6 +24,7 @@ const createApiRouter = (api = apiClient) => {
     },
     admin: {
       courses: {
+        create: (data)=> api.post("/admin/courses", data),
         index: (params)=>api.get("/admin/courses", {params}),
         show: (courseId)=>api.get("/admin/courses/" + courseId),
         // search: (params)=>api.get("/admin/courses", {params}), order_by: id, order_by: price

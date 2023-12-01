@@ -1,84 +1,93 @@
 <template>
-  <form
-    @submit="onSubmit"
-    class="flex flex-col items-center border-2 px-6 py-10 max-w-xl mx-auto mb-6 rounded-[4px]"
-  >
-    <text-field
-      type="text"
-      name="title"
-      label="Title"
-      placeholder="Write title"
+  <div class="container mx-auto">
+    <form
+      @submit="onSubmit"
+      class="flex flex-col items-center border-2 px-6 py-10 max-w-xl mx-auto mb-6 rounded-[4px]"
+    >
 
-    />
-    <password-field
-      type="text"
-      name="meta_title"
-      label="meta_title"
-      placeholder="Write meta_title"
-    />
-    <password-field
-      type="text"
-      name="meta_description"
-      label="meta_description"
-      placeholder="Write meta_description"
-    />
-    <password-field
-      type="text"
-      name="slug"
-      label="slug"
-      placeholder="Write slug"
-    />
-    <password-field
-      type="text"
-      name="description"
-      label="description"
-      placeholder="Write description"
-    />
+      <text-field
+        type="text"
+        name="portal_id"
+        label="portal_id"
+        placeholder="Write portal_id"
+      />
+      <text-field
+        type="text"
+        name="title"
+        label="Title"
+        placeholder="Write title"
+      />
+      <password-field
+        type="text"
+        name="meta_title"
+        label="meta_title"
+        placeholder="Write meta_title"
+      />
+      <password-field
+        type="text"
+        name="meta_description"
+        label="meta_description"
+        placeholder="Write meta_description"
+      />
+      <password-field
+        type="text"
+        name="slug"
+        label="slug"
+        placeholder="Write slug"
+      />
+      <password-field
+        type="text"
+        name="description"
+        label="description"
+        placeholder="Write description"
+      />
 
-    <BaseButton :disabled="loading">Submit</BaseButton>
-    <pre>{{ error }}</pre>
-  </form>
+      <BaseButton :disabled="loading" >{{ loading ? "...Loading" : "Submit" }}</BaseButton>
+      <pre>{{ error }}</pre>
+      <pre>{{ initialValue }}</pre>
+    </form>
+  </div>
 </template>
 <script setup>
-import { ref } from "vue";
 import * as yup from "yup";
 import { useForm } from "vee-validate";
 import TextField from "@/components/ui/TextField.vue";
 import PasswordField from "@/components/ui/PasswordField.vue";
-import BaseModal from "@/components/ui/BaseModal.vue";
 import BaseButton from "@/components/ui/BaseButton.vue";
 import apiRouter from "@/api/apiRouter.js";
 import useHandleLoadingAndError from "@/composables/useHandleLoadingAndError";
-import useAuthStore from '@/stores/authStore.js'
+import useCreatCoursesStore from '@/stores/creatCoursesStore';
 
-defineProps({
-  modelValue: String,
-});
-
-const emit = defineEmits(['showModal'])
-const authStore = useAuthStore();
-const showPassword = ref(false);
-const openModal = ref(false);
+const creatCoursesStore = useCreatCoursesStore();
 
 const initialValue = {
-  email: "",
-  password: "",
+  portal_id: "",
+  title: "",
+  meta_title: "",
+  meta_description: "",
+  slug: "",
+  description: "",
 };
 
 const { handleSubmit, values, resetForm } = useForm({
   initialValues: initialValue,
   validationSchema: yup.object({
-    email: yup.string().required().email(),
-    password: yup.string().required().min(6),
+    portal_id: yup.string().required(),
+    title: yup.string().required(),
+    meta_title: yup.string().required(),
+    meta_description: yup.string().required(),
+    slug: yup.string().required(),
+    description: yup.string().required(),
   }),
 });
 
+/*
 const submitForm = async () => {
   loading.value = true;
 
   try {
-    await apiRouter.auth.login(values)
-
+    await apiRouter.admin.courses.create(values)
+    console.log(values)
     resetForm();
   } catch (error) {
 
@@ -86,19 +95,19 @@ const submitForm = async () => {
   } finally {
     loading.value = false;
   }
+  alert(JSON.stringify(values, null, 2));
 };
-const onChangeModal = (newVal) => {
-  openModal.value = newVal;
-};
+*/
 
 const {handler, loading, error} = useHandleLoadingAndError()
 
 const onSubmit =  handleSubmit(async (data, {resetForm}) => {
-  const res =  await handler(authStore.logIn(data))
-
+  const res =  await handler(creatCoursesStore.creatCourses(data))
+  console.log('11111res: ', res)
+  console.log('22222data: ', data)
   if (!res.error) {
-    emit('showModal')
     resetForm()
   }
+  console.log('Форма успешно отправлена');
 });
 </script>

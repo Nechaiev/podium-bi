@@ -26,7 +26,7 @@ const useAuthStore = defineStore('appAuth', () => {   //'appAuth' unique id. Can
     if(isAuth.value) {
       const res = await apiRouter.auth.me();
       user.value = getData(res).data;
-      console.log(user.value)
+      // console.log(user.value)
     }
   }
 
