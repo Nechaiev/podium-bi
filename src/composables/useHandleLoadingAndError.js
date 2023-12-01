@@ -6,10 +6,10 @@ const getMessageErrorByResponse = (error) => {
     return MessagesError.unauthenticated;
   }
   let message =
-      error?.response?.data?.message ||
-      error?.response?.message ||
-      error?.statusMessage ||
-      error?.message;
+    error?.response?.data?.message ||
+    error?.response?.message ||
+    error?.statusMessage ||
+    error?.message;
 
   if (MessagesError[message]) {
     message = MessagesError[message];
@@ -17,8 +17,44 @@ const getMessageErrorByResponse = (error) => {
   return message || MessagesError.somethingWentWrong;
 };
 
+/*
+const a = {
+  data: {
+    data: {},
+  },
+}
+
+const b = {
+  data: {
+    data: [],
+    meta: [],
+  }
+}
+
+const c = {
+  data: {
+    id: 1,
+  }
+}
+
+const d = {
+  id: 1,
+}
+
+getData(a) === {};                       // data?.data
+getData(b) === { data: [], meta: [], };  // data
+getData(c) === { id: 1, };               // data
+getData(d) === { id: 1, };               // res
+*/
+
 export const getData = (res) => {
-  return res?.data?.data || res?.data || res
+  const data = res?.data;
+
+  if(data && Object.keys(data).length !== 1 ){  /**/
+    return data
+  }
+
+  return data?.data || data || res
 }
 
 const defaulOptions = {
