@@ -3,7 +3,7 @@
     <div v-if="loading">
       Loading...
     </div>
-    <div  v-else class=" p-5 border mb-5">
+    <div v-else class=" p-5 border mb-5">
       <h1 class="text-title_1 italic">Single course {{ courses.id }}</h1>
       <h2 class="text-title_4 ">{{ courses.title }}</h2>
       <div class="text-title_4">
@@ -12,45 +12,49 @@
           <span :style="{ width: ratingPercentage }"></span>
         </span>
       </div>
-
       <img :src="courses.thumbnail" :alt="courses.title">
-      <ul class="grid gap-4 grid-cols-5 grid-rows-1 my-8" >
-        <li class="border text-center p-4" v-for="state in courses.states" :key="state.id">{{state.name}}</li>
+      <ul class="grid gap-4 grid-cols-5 grid-rows-1 my-8">
+        <li class="border text-center p-4" v-for="state in courses.states" :key="state.id">{{ state.name }}</li>
       </ul>
-      <pre>route.params {{$route.params}}</pre>
+      <BaseButton @click="deletePost">Delete this course</BaseButton>
+      <pre>route.params {{ $route.params }}</pre>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, computed, watch } from 'vue';
-import { useRoute } from 'vue-router';
+import {ref, computed, watch} from 'vue';
+import {useRoute} from 'vue-router';
 import apiRouter from '@/api/apiRouter'
 import useHandleLoadingAndError from '@/composables/useHandleLoadingAndError'
-import { useSingleCoursesStore } from '@/stores/singleCoursesStore';
+import {useSingleCoursesStore} from '@/stores/singleCoursesStore';
+import BaseButton from "@/components/ui/BaseButton.vue";
 
 const singleCoursesStore = useSingleCoursesStore();
 const route = useRoute();
 const {loading, handler} = useHandleLoadingAndError();
-const courses = ref({ courses: [] });
+const courses = ref({courses: []});
 const fetchCourses = async (url) => {
   const response = await apiRouter.admin.courses.show(route.params.id)
   courses.value = response.data.data;
   handler(singleCoursesStore.getCourses(url))
 }
+
 const fetchData = async () => {
-  await handler(()=> Promise.all([fetchCourses()]))
+  await handler(() => Promise.all([fetchCourses()]))
 };
+
+const deletePost = async () => {
+  console.log(route.params.id)
+  await apiRouter.admin.courses.delete(route.params.id)
+}
+
+watch(() => route.params.id, fetchData, {immediate: true})
 
 // const rating = ref(3);
 const ratingPercentage = computed(() => {
   return `${(courses.value.rating / 5) * 100}%`;
 });
-
-
-
-watch(()=> route.params.id, fetchData, { immediate: true })
-
 </script>
 
 <style>

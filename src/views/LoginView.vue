@@ -1,9 +1,11 @@
 <template>
-    <div class="container px-4 mx-auto">
-      <h1 class="text-title_1">LoginView</h1>
-      <BaseForm @showModal="setOpenPopup"/>
-      <BasePopup :openPopup="openPopup"/>
-    </div>
+  <div class="container px-4 mx-auto">
+    <h1 class="text-title_1">LoginView</h1>
+    <p>danny@neweradrugtesting.com</p>
+    <p>andrew@easlerlaw.com</p>
+    <BaseForm @showModal="setOpenPopup"/>
+    <BasePopup :openPopup="openPopup"/>
+  </div>
 </template>
 
 <script setup>

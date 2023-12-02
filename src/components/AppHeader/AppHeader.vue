@@ -4,7 +4,7 @@
       <app-logo class="mr-[-57px]"></app-logo>
       <template-nav :items="nav" variant="header"></template-nav>
       <div v-if="isAuth" class="grid justify-center items-center">
-        <span>{{fullName}}</span>
+        <span class="text-center">{{ fullName }}</span>
         <button @click="onLogout" class="whitespace-nowrap  hover:text-primaryColor" :disabled="loading">LogOut</button>
       </div>
     </div>
@@ -19,13 +19,13 @@ import useAuthStore from '@/stores/authStore.js'
 import useHandleLoadingAndError from "@/composables/useHandleLoadingAndError";
 
 const authStore = useAuthStore();
-const fullName = computed(()=> authStore.fullName)
-const isAuth = computed(()=> authStore.isAuth)
+const fullName = computed(() => authStore.fullName)
+const isAuth = computed(() => authStore.isAuth)
 const {handler, loading} = useHandleLoadingAndError()
-const onLogout = ()=> {
+const onLogout = () => {
   handler(authStore.logOut)
 }
-const nav = computed(()=>{
+const nav = computed(() => {
   return [
     {
       text: 'Home',
@@ -86,12 +86,12 @@ const nav = computed(()=>{
     },
     {
       text: 'login',
-      to:  {name: 'login'},
+      to: {name: 'login'},
       auth: false,
     },
   ].filter(item => {
     /*case 0*/
-    if(typeof item.auth === "boolean") {
+    if (typeof item.auth === "boolean") {
       return item.auth === isAuth.value
     }
     return true;
@@ -116,7 +116,6 @@ const nav = computed(()=>{
     // }
   })
 })
-
 
 
 </script>
