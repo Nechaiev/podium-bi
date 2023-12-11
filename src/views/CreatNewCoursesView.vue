@@ -7,11 +7,10 @@
 </template>
 
 <script>
-
 import {defineComponent} from "vue";
 import CreatCoursesForm from "@/components/ui/CreatCoursesForm.vue";
 
 export default defineComponent({
   components: {CreatCoursesForm}
-})
+});
 </script>>
