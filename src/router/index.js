@@ -9,11 +9,9 @@ import BlogView from '@/views/BlogView.vue'
 import CustomLayout from '@/layouts/CustomLayout.vue'
 import LoginView from '@/views/LoginView.vue'
 import CoursesView from '@/views/CoursesView.vue'
-import SingleCoursesView from "@/views/SingleCoursesView.vue";
-import useAuthStore from "@/stores/authStore"
-import CreatNewCoursesView from "@/views/CreatNewCoursesView.vue";
-
-
+import useAuthStore from '@/stores/authStore'
+import CreatNewCoursesView from '@/views/CreatNewCoursesView.vue'
+import SingleCoursesView from '@/views/SingleCoursesView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -33,18 +31,17 @@ const router = createRouter({
     {
       path: '/podium-bi-portal',
       name: 'podium-bi-portal',
-      component: PodiumBiPortalView,
-
+      component: PodiumBiPortalView
     },
     {
       path: '/walmart-retail-data',
       name: 'walmart-retail-data',
-      component: WalmartRetailDataView,
+      component: WalmartRetailDataView
     },
     {
       path: '/contact',
       name: 'contact',
-      component: ContactView,
+      component: ContactView
     },
     // {
     //   path: '/to-do-list',
@@ -54,15 +51,15 @@ const router = createRouter({
     {
       path: '/posts',
       name: 'posts',
-      component: EpisodesView,
+      component: EpisodesView
     },
     {
       path: '/posts/:id',
       name: 'SingleEpisodes',
       meta: {
-        isAuth: true,
+        isAuth: true
       },
-      component: SingleEpisodes,
+      component: SingleEpisodes
     },
     {
       path: '/blog',
@@ -70,7 +67,7 @@ const router = createRouter({
       component: BlogView,
       meta: {
         private: true,
-        layout: CustomLayout,
+        layout: CustomLayout
       }
     },
     {
@@ -78,51 +75,49 @@ const router = createRouter({
       name: 'courses',
       component: CoursesView,
       meta: {
-        private: true,
-      },
+        private: true
+      }
     },
     {
       path: '/courses/:id',
       name: 'SingleCourses',
       component: SingleCoursesView,
       meta: {
-        private: true,
-      },
+        private: true
+      }
     },
     {
       path: '/creat-courses',
       name: 'creat-courses',
       component: CreatNewCoursesView,
       meta: {
-        private: true,
-      },
+        private: true
+      }
     },
     {
       path: '/login',
       name: 'login',
-      component: LoginView,
-
-    },
+      component: LoginView
+    }
     /* {
-        path: '/about',
-        name: 'about',
-        // route level code-splitting
-        // this generates a separate chunk (About.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
-        component: () => import('../views/AboutView.vue')
-      }*/
-  ],
+      path: '/about',
+      name: 'about',
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import('../views/AboutView.vue')
+    }*/
+  ]
 })
-
 
 router.beforeEach((to, from, next) => {
   const authStore = useAuthStore()
 
   if (to.meta.private && !authStore.isAuth) {
-    console.log(to.meta);
-    next('/login');
+    console.log(to.meta)
+    next('/login')
   } else {
-    next();
+    next()
   }
 })
 export default router
