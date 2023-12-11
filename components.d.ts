@@ -35,6 +35,7 @@ declare module 'vue' {
     UiBaseLoading: typeof import('./src/components/ui/BaseLoading.vue')['default']
     UiBaseModal: typeof import('./src/components/ui/BaseModal.vue')['default']
     UiBasePopup: typeof import('./src/components/ui/BasePopup.vue')['default']
+    UiComboboxValidate: typeof import('./src/components/ui/ComboboxValidate.vue')['default']
     UiControledField: typeof import('./src/components/ui/ControledField.vue')['default']
     UiCreatCoursesForm: typeof import('./src/components/ui/CreatCoursesForm.vue')['default']
     UiEditTaskForm: typeof import('./src/components/ui/EditTaskForm.vue')['default']
@@ -65,8 +66,11 @@ declare module 'vue' {
     UiTemplateLink: typeof import('./src/components/ui/TemplateLink.vue')['default']
     UiTemplateNav: typeof import('./src/components/ui/TemplateNav.vue')['default']
     UiTemplateNavItem: typeof import('./src/components/ui/TemplateNavItem.vue')['default']
+    UiTextareaFieldValidate: typeof import('./src/components/ui/TextareaFieldValidate.vue')['default']
     UiTextField: typeof import('./src/components/ui/TextField.vue')['default']
+    UiTextFieldValidate: typeof import('./src/components/ui/TextFieldValidate.vue')['default']
     UiVeeValidField: typeof import('./src/components/ui/VeeValidField.vue')['default']
     WelcomeItem: typeof import('./src/components/WelcomeItem.vue')['default']
+    WigetsFormsFormCourseUpdate: typeof import('./src/components/wigets/forms/FormCourseUpdate.vue')['default']
   }
 }
