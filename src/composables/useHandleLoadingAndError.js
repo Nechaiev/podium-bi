@@ -1,21 +1,21 @@
-import {ref} from 'vue'
+import { ref } from 'vue'
 import MessagesError from '@/globals/MessagesError.js'
 const getMessageErrorByResponse = (error) => {
-  const status = error?.response?.status || error?.statusCode;
+  const status = error?.response?.status || error?.statusCode
   if (status === 401) {
-    return MessagesError.unauthenticated;
+    return MessagesError.unauthenticated
   }
   let message =
     error?.response?.data?.message ||
     error?.response?.message ||
     error?.statusMessage ||
-    error?.message;
+    error?.message
 
   if (MessagesError[message]) {
-    message = MessagesError[message];
+    message = MessagesError[message]
   }
-  return message || MessagesError.somethingWentWrong;
-};
+  return message || MessagesError.somethingWentWrong
+}
 
 /*
 const a = {
@@ -48,44 +48,46 @@ getData(d) === { id: 1, };               // res
 */
 
 export const getData = (res) => {
-  const data = res?.data;
+  const data = res?.data
 
-  if(data && Object.keys(data).length !== 1 ){  /**/
+  if (data && Object.keys(data).length !== 1) {
+    /**/
     return data
   }
 
   return data?.data || data || res
 }
 
-const defaulOptions = {
+const defaultOptions = {
   loading: false,
   initData: {},
   getData
 }
 
-const useHandleLoadingAndError = (options = defaulOptions) => {
-  const mergeOptions = {...defaulOptions, ...options};
-  const loading = ref(mergeOptions.loading);
-  const data = ref(mergeOptions.initData);
-  const error = ref(null);
+const useHandleLoadingAndError = (options = defaultOptions) => {
+  const mergeOptions = { ...defaultOptions, ...options }
+  const loading = ref(mergeOptions.loading)
+  const data = ref(mergeOptions.initData)
+  const error = ref(null)
 
-  const handler = async (callBack = () => Promise.resolve()) => { // callback = function || promise
+  const handler = async (callBack = () => Promise.resolve()) => {
+    // callback = function || promise
     try {
-      loading.value = true;
-      error.value = null;
-      const res = await (typeof callBack === "function" ? callBack() : callBack);
+      loading.value = true
+      error.value = null
+      const res = await (typeof callBack === 'function' ? callBack() : callBack)
       data.value = mergeOptions.getData(res)
     } catch (e) {
       error.value = getMessageErrorByResponse(e)
     } finally {
-      loading.value = false;
+      loading.value = false
     }
     return {
       error: error.value,
       data: data.value
     }
   }
-  return {loading, data, error, handler, getData}
+  return { loading, data, error, handler, getData }
 }
 
 export default useHandleLoadingAndError
