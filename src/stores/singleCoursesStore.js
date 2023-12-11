@@ -1,24 +1,24 @@
-import {defineStore} from "pinia";
-import {ref} from "vue";
-import { useRoute } from 'vue-router';
-import { getData } from "@/composables/useHandleLoadingAndError";
-import apiRouter from '@/api/apiRouter';
-import apiClient from "@/api/apiClient";
+import { defineStore } from 'pinia'
+import { ref } from 'vue'
+import { getData } from '@/composables/useHandleLoadingAndError'
+import apiRouter from '@/api/apiRouter'
 
 export const useSingleCoursesStore = defineStore('singleCoursesStore', () => {
-  const singleCoursesData = ref(null)
-  const route = useRoute();
-  const  courses = ref({  courses: [] });
+  const course = ref(null)
 
-  const getCourses = async (url) => {
-    if(!singleCoursesData.value) {
-      // const response = await apiRouter.admin.courses.show(route.params.id)
-      const response =  await ( url ? apiClient.get(url) : apiRouter.admin.courses.show(route.params.id))
-      courses.value = getData(response)
-    }
+  const fetchCourse = async (id) => {
+    const res = await apiRouter.admin.courses.show(id)
+    course.value = getData(res)
+    return course.value
   }
 
-  return getCourses
-})
+  const updateCourse = (data) => {
+    course.value = data
+  }
 
- 
+  return {
+    course,
+    fetchCourse,
+    updateCourse
+  }
+})
