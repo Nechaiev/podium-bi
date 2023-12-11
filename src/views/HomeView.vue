@@ -1,6 +1,6 @@
 <template>
     <TemplateFirstScreen/>
-    <PopUpWrapper popupPosition="topRight">
+    <pop-up-wrapper popupPosition="topRight">
       <template #body>
         <div>
           <div>
@@ -13,7 +13,7 @@
           </div>
         </div>
       </template>
-    </PopUpWrapper>
+    </pop-up-wrapper>
     <section class="mb-24">
       <div class="container mx-auto px-4 max-w-[986px]">
         <AccordionWrapper :items="accordionList">
@@ -42,6 +42,7 @@
     import BaseForm from "@/components/ui/BaseForm.vue";
     import BasePopup from "@/components/ui/BasePopup.vue";
     import {ref} from "vue";
+    import PopUpWrapper from "@/components/ui/PopUpWrapper.vue";
 
     const openPopup = ref(false);
 
