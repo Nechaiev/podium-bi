@@ -6,35 +6,29 @@
     >
       <text-field
         type="text"
-        name="portal_id"
-        label="portal_id"
-        placeholder="Write portal_id"
-      />
-      <text-field
-        type="text"
         name="title"
         label="Title"
         placeholder="Write title"
       />
-      <password-field
+      <text-field
         type="text"
         name="meta_title"
         label="meta_title"
         placeholder="Write meta_title"
       />
-      <password-field
+      <text-field
         type="text"
         name="meta_description"
         label="meta_description"
         placeholder="Write meta_description"
       />
-      <password-field
+      <text-field
         type="text"
         name="slug"
         label="slug"
         placeholder="Write slug"
       />
-      <password-field
+      <text-field
         type="text"
         name="description"
         label="description"
@@ -58,7 +52,7 @@ import useCreatCoursesStore from '@/stores/creatCoursesStore';
 const creatCoursesStore = useCreatCoursesStore();
 
 const initialValue = {
-  portal_id: "",
+  portal_id: "1",
   title: "",
   meta_title: "",
   meta_description: "",
@@ -69,7 +63,6 @@ const initialValue = {
 const {handleSubmit, values} = useForm({
   initialValues: initialValue,
   validationSchema: yup.object({
-    portal_id: yup.string().required(),
     title: yup.string().required(),
     meta_title: yup.string().required(),
     meta_description: yup.string().required(),
@@ -82,8 +75,6 @@ const {handler, loading, error} = useHandleLoadingAndError()
 
 const onSubmit = handleSubmit(async (data, {resetForm}) => {
   const res = await handler(creatCoursesStore.creatCourses(data))
-  console.log('11111res: ', res)
-  console.log('22222data: ', data)
   if (!res.error) {
     resetForm()
   }
