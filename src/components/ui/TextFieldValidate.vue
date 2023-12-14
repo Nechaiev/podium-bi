@@ -37,11 +37,11 @@ const props = defineProps({
 defineEmits(["update:modelValue"]);
 
 const {value: innerValue, errors} = useField(
-  () => props.name,
-  props.validationSchema,
-  {
-    syncVModel: props.syncVModel,
-  },
+    () => props.name,
+    props.validationSchema,
+    {
+      syncVModel: props.syncVModel,
+    },
 );
 
 const {hasError, errorText} = useGetFieldError(errors)

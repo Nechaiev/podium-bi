@@ -1,0 +1,34 @@
+.tox .tox-collection__item-label {
+  line-height: 1.1;
+}
+
+[contenteditable="true"] [data-dynamicWorld] {
+  font-weight: 400;
+  font-size: 16px;
+  font-style: italic;
+}
+
+[contenteditable="true"]  [data-tooltip] {
+  position:relative;
+}
+[contenteditable="true"]  [data-tooltip]:before {
+  transition: ease-in .3s;
+  visibility: hidden;
+  opacity: 0;
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%;
+  left: -50%;
+  line-height: 1.2;
+  background: #000;
+  color: #fff;
+  font-size: 10px;
+  padding: 4px 8px;
+  width: max-content;
+  font-weight: 400;
+}
+
+[contenteditable="true"] [data-tooltip]:hover:before {
+  visibility: visible;
+  opacity: 1;
+}

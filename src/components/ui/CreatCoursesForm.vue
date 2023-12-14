@@ -1,40 +1,43 @@
 <template>
   <div class="container mx-auto">
     <form
-      @submit="onSubmit"
-      class="flex flex-col items-center border-2 px-6 py-10 max-w-xl mx-auto mb-6 rounded-[4px]"
+        @submit="onSubmit"
+        class="flex flex-col items-center border-2 px-6 py-10 max-w-xl mx-auto mb-6 rounded-[4px]"
     >
+
+
       <text-field
-        type="text"
-        name="title"
-        label="Title"
-        placeholder="Write title"
+          type="text"
+          name="title"
+          label="Title"
+          placeholder="Write title"
       />
-      <text-field
-        type="text"
-        name="meta_title"
-        label="meta_title"
-        placeholder="Write meta_title"
+      <password-field
+          type="text"
+          name="meta_title"
+          label="meta_title"
+          placeholder="Write meta_title"
       />
-      <text-field
-        type="text"
-        name="meta_description"
-        label="meta_description"
-        placeholder="Write meta_description"
+      <password-field
+          type="text"
+          name="meta_description"
+          label="meta_description"
+          placeholder="Write meta_description"
       />
-      <text-field
-        type="text"
-        name="slug"
-        label="slug"
-        placeholder="Write slug"
+      <password-field
+          type="text"
+          name="slug"
+          label="slug"
+          placeholder="Write slug"
       />
-      <text-field
-        type="text"
-        name="description"
-        label="description"
-        placeholder="Write description"
+      <password-field
+          type="text"
+          name="description"
+          label="description"
+          placeholder="Write description"
       />
-      <BaseButton :disabled="loading">{{ loading ? "...Loading" : "Submit" }}</BaseButton>
+
+      <BaseButton :disabled="loading" >{{ loading ? "...Loading" : "Submit" }}</BaseButton>
       <pre>{{ error }}</pre>
       <pre>{{ values }}</pre>
     </form>
@@ -42,7 +45,7 @@
 </template>
 <script setup>
 import * as yup from "yup";
-import {useForm} from "vee-validate";
+import { useForm } from "vee-validate";
 import useHandleLoadingAndError from "@/composables/useHandleLoadingAndError";
 import TextField from "@/components/ui/TextField.vue";
 import PasswordField from "@/components/ui/PasswordField.vue";
@@ -60,7 +63,7 @@ const initialValue = {
   description: "",
 };
 
-const {handleSubmit, values} = useForm({
+const { handleSubmit, values } = useForm({
   initialValues: initialValue,
   validationSchema: yup.object({
     title: yup.string().required(),
@@ -73,8 +76,8 @@ const {handleSubmit, values} = useForm({
 
 const {handler, loading, error} = useHandleLoadingAndError()
 
-const onSubmit = handleSubmit(async (data, {resetForm}) => {
-  const res = await handler(creatCoursesStore.creatCourses(data))
+const onSubmit =  handleSubmit(async (data, {resetForm}) => {
+  const res =  await handler(creatCoursesStore.creatCourses(data))
   if (!res.error) {
     resetForm()
   }

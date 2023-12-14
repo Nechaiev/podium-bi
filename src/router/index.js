@@ -12,6 +12,7 @@ import CoursesView from '@/views/CoursesView.vue'
 import useAuthStore from '@/stores/authStore'
 import CreatNewCoursesView from '@/views/CreatNewCoursesView.vue'
 import SingleCoursesView from '@/views/SingleCoursesView.vue'
+import ContentPageView from '@/views/ContentPageView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -29,6 +30,11 @@ const router = createRouter({
       component: HomeView
     },
     {
+      path: '/content-page',
+      name: 'content-page',
+      component: ContentPageView
+    },
+    {
       path: '/podium-bi-portal',
       name: 'podium-bi-portal',
       component: PodiumBiPortalView
@@ -38,6 +44,7 @@ const router = createRouter({
       name: 'walmart-retail-data',
       component: WalmartRetailDataView
     },
+
     {
       path: '/contact',
       name: 'contact',

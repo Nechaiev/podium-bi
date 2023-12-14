@@ -1,17 +1,17 @@
 <template>
-  <v-textarea
-    :label="label"
-    :placeholder="placeholder"
-    :variant="variant"
-    :type="type"
-    v-model="innerValue"
-    :error="!!hasError"
-    :error-messages="errorText"
-    class="w-full"
-    v-bind="$attrs"
-  >
+    <v-textarea
+        :label="label"
+        :placeholder="placeholder"
+        :variant="variant"
+        :type="type"
+        v-model="innerValue"
+        :error="!!hasError"
+        :error-messages="errorText"
+        class="w-full"
+        v-bind="$attrs"
+    >
 
-  </v-textarea>
+    </v-textarea>
 </template>
 
 <script setup>
@@ -40,11 +40,11 @@ const props = defineProps({
 defineEmits(["update:modelValue"]);
 
 const {value: innerValue, errors} = useField(
-  () => props.name,
-  props.validationSchema,
-  {
-    syncVModel: props.syncVModel,
-  },
+    () => props.name,
+    props.validationSchema,
+    {
+      syncVModel: props.syncVModel,
+    },
 );
 
 const {hasError, errorText} = useGetFieldError(errors)

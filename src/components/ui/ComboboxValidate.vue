@@ -1,15 +1,15 @@
 <template>
   <v-combobox
-    :label="label"
-    :placeholder="placeholder"
-    :variant="variant"
-    :type="type"
-    v-model="innerValue"
-    :error="!!hasError"
-    :error-messages="errorText"
-    class="w-full"
-    :items="items"
-    v-bind="$attrs"
+      :label="label"
+      :placeholder="placeholder"
+      :variant="variant"
+      :type="type"
+      v-model="innerValue"
+      :error="!!hasError"
+      :error-messages="errorText"
+      class="w-full"
+      :items="items"
+      v-bind="$attrs"
   ></v-combobox>
 </template>
 
@@ -43,11 +43,11 @@ const props = defineProps({
 defineEmits(["update:modelValue"]);
 
 const {value: innerValue, errors} = useField(
-  () => props.name,
-  props.validationSchema,
-  {
-    syncVModel: props.syncVModel,
-  },
+    () => props.name,
+    props.validationSchema,
+    {
+      syncVModel: props.syncVModel,
+    },
 );
 
 const {hasError, errorText} = useGetFieldError(errors)

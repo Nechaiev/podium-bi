@@ -4,7 +4,7 @@
        :id="id"
        :placeholder="placeholder"
        ></slot>
-      <base-label :for="labelForInput" :label="label" :class="labelPosition" />  
+      <base-label :for="labelForInput" :label="label" :class="labelPosition" />
       <slot name="errorMessage">
         <ErrorMessage class="text-red-600" v-if="name" :name="name"/>
       </slot>
@@ -17,7 +17,8 @@
 <script setup>
     import {computed} from 'vue'
     import BaseLabel from "@/components/ui/BaseLabel.vue";
-    
+    import {ErrorMessage} from 'vee-validate'
+
     const props = defineProps({
       type: String,
       id: String,

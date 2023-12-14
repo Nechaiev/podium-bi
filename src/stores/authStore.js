@@ -8,44 +8,44 @@ const useAuthStore = defineStore('appAuth', () => {   //'appAuth' unique id. Can
   const user = ref({});
 
   const fullName = computed(()=>{
-    return user.value.first_name + " " + user.value.last_name
+     return user.value.first_name + " " + user.value.last_name
   })
-  const reset = ()=>{
-    isAuth.value = false;
-    user.value = {};
-  }
-  const logIn = async (data)=>{
-    const res = await apiRouter.auth.login(data)
-    isAuth.value = true
-    user.value = getData(res)
-
-    return res
-  }
-
-  const fetchUser = async () => {
-    if(isAuth.value) {
-      const res = await apiRouter.auth.me();
-      user.value = getData(res).data;
-      // console.log(user.value)
+    const reset = ()=>{
+      isAuth.value = false;
+      user.value = {};
     }
-  }
+    const logIn = async (data)=>{
+      const res = await apiRouter.auth.login(data)
+      isAuth.value = true
+      user.value = getData(res)
 
-  const logOut = async () => {
-    if(isAuth.value) {
-      await apiRouter.auth.logout()
-      reset()
+      return res
     }
-  }
 
-  return {
-    isAuth,
-    user,
-    fullName,
-    reset,
-    logIn,
-    fetchUser,
-    logOut
-  }
+    const fetchUser = async () => {
+       if(isAuth.value) {
+         const res = await apiRouter.auth.me();
+         user.value = getData(res).data;
+         // console.log(user.value)
+       }
+    }
+
+    const logOut = async () => {
+      if(isAuth.value) {
+        await apiRouter.auth.logout()
+        reset()
+      }
+    }
+
+    return {
+      isAuth,
+      user,
+      fullName,
+      reset,
+      logIn,
+      fetchUser,
+      logOut
+    }
 
 }, {
   persist: {

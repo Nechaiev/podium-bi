@@ -6,14 +6,14 @@ import {ref} from "vue";
 const useCreatCoursesStore = defineStore('creatCoursesStore', () => {   //'appAuth' unique id. Can't be the same
   const creatCoursesData = ref(null)
   const creatCourses = async (data)=> {
-    console.log('store: ', data)
-    const res = await apiRouter.admin.courses.create(data)
-    creatCoursesData.value = getData(res)
-  }
+        console.log('store: ', data)
+        const res = await apiRouter.admin.courses.create(data)
+        creatCoursesData.value = getData(res)
+    }
 
-  return {
-    creatCourses,
-  }
+    return {
+      creatCourses,
+    }
 })
 
 export default useCreatCoursesStore;

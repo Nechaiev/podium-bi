@@ -36,7 +36,8 @@ const createApiRouter = (api = apiClient) => {
         create: (courseId, data) =>
           api.post('/courses/' + courseId + '/thumbnail?_method=PUT', data),
         delete: (courseId) => api.delete('/courses/' + courseId + '/thumbnail')
-      }
+      },
+      getSelects: () => api.get('courses/selects?portal_id=1')
     },
     posts: {
       index: (params) => api.get('posts', { params }),

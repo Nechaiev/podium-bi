@@ -2,62 +2,62 @@
   <div>
 
     <form
-      @submit="onSubmit"
-      class="flex flex-col items-center border-2 px-6 py-10 max-w-xl mx-auto mb-6 rounded-[4px]"
+        @submit="onSubmit"
+        class="flex flex-col items-center border-2 px-6 py-10 max-w-xl mx-auto mb-6 rounded-[4px]"
     >
-      <!--      <text-field
-                type="email"
-                name="email"
-                label="Email"
-                placeholder="Your email"
+<!--      <text-field
+          type="email"
+          name="email"
+          label="Email"
+          placeholder="Your email"
 
-            />
-            <password-field
-                :type="showPassword ? 'text' : 'password'"
-                name="password"
-                label="password"
-                placeholder="Your password"
-            />-->
+      />
+      <password-field
+          :type="showPassword ? 'text' : 'password'"
+          name="password"
+          label="password"
+          placeholder="Your password"
+      />-->
       <text-field-validate
-        type="email"
-        name="email"
-        label="Email"
-        placeholder="Your email"
-        class="w-full"
+          type="email"
+          name="email"
+          label="Email"
+          placeholder="Your email"
+          class="w-full"
       />
 
       <text-field-validate
-        name="password"
-        label="password"
-        placeholder="Your password"
-        :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
-        :type="visible ? 'text' : 'password'"
-        @click:append-inner="visible = !visible"
-        class="w-full"
+          name="password"
+          label="password"
+          placeholder="Your password"
+          :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
+          :type="visible ? 'text' : 'password'"
+          @click:append-inner="visible = !visible"
+          class="w-full"
       />
       <combobox-validate
-        name="city"
-        label="City"
-        :items="['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']"
+          name="city"
+          label="City"
+          :items="['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']"
       ></combobox-validate>
-      <!--      <div class="flex items-center my-2">
-              <input
-                  type="checkbox"
-                  class="form-checkbox h-5 w-5 text-green-500"
-                  id="togglePassword"
-                  v-model="showPassword"
-              />
-              <label for="togglePassword" class="ml-2">Show Password</label>
-            </div>-->
+<!--      <div class="flex items-center my-2">
+        <input
+            type="checkbox"
+            class="form-checkbox h-5 w-5 text-green-500"
+            id="togglePassword"
+            v-model="showPassword"
+        />
+        <label for="togglePassword" class="ml-2">Show Password</label>
+      </div>-->
       <BaseButton :disabled="loading">Submit</BaseButton>
       <pre>{{ error }}</pre>
     </form>
 
     <teleport to="body">
       <BaseModal
-        :open-modal="openModal"
-        @confirm="submitForm"
-        @update:open-modal="onChangeModal"
+          :open-modal="openModal"
+          @confirm="submitForm"
+          @update:open-modal="onChangeModal"
       />
     </teleport>
     <div class="flex justify-center my-12">

@@ -4,26 +4,26 @@
       Loading...
     </div>
     <div v-else class=" p-5 border mb-5">
-      <h1 class="text-title_1 italic">Single course {{ courses.id }}</h1>
-      <form id="onUpdate">
-        <input class="text-title_4" :value="courses.title" />
-        <!--            <BaseButton @click.prevent="onUpdate">onUpdate title</BaseButton>-->
-        <BaseButton @click.prevent="onUpdate(courses.title)">onUpdate title</BaseButton>
-      </form>
-      <div class="text-title_4">
-        rating:
-        <span class="star-rating">
+          <h1 class="text-title_1 italic">Single course {{ courses.id }}</h1>
+          <form id="onUpdate">
+            <input class="text-title_4" :value="courses.title" />
+<!--            <BaseButton @click.prevent="onUpdate">onUpdate title</BaseButton>-->
+            <BaseButton @click.prevent="onUpdate(courses.title)">onUpdate title</BaseButton>
+          </form>
+          <div class="text-title_4">
+            rating:
+            <span class="star-rating">
               <span :style="{ width: ratingPercentage }"></span>
             </span>
-      </div>
+          </div>
 
       <form @submit="onSubmit">
-        <img :src="courses.thumbnail" :alt="courses.title" class="max-w-7xl max-h-96">
-        <input
-          @change="onSetFile($event.target.files[0])"
-          name="file"
-          type="file"
-        >
+          <img :src="courses.thumbnail" :alt="courses.title" class="max-w-7xl max-h-96">
+          <input
+              @change="onSetFile($event.target.files[0])"
+              name="file"
+              type="file"
+          >
 
         <div v-if="loadingSet">
           loadingSet...
@@ -69,7 +69,7 @@ const fetchData = async () => {
 
 const deletePost = async () => {
   console.log(route.params.id)
-  await apiRouter.admin.courses.delete(route.params.id)
+   await apiRouter.admin.courses.delete(route.params.id)
 }
 
 watch(()=> route.params.id, fetchData, { immediate: true })

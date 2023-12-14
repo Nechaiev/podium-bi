@@ -27,6 +27,7 @@ const props = defineProps({
   body: String,
   isExpanded: Boolean,
 })
+
 const emit = defineEmits(['toggle']);
 const bodyClass = computed(() => {
   return [
